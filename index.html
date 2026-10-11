@@ -1,0 +1,866 @@
+<title>Bella Cristal Costos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8">
+<meta name="theme-color" content="#8a2d5c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Young+Serif&display=swap">
+<style>
+/* Layout: una sola columna tipo app de bolsillo; pestañas pegajosas arriba, tarjetas solo donde hay datos editables o un veredicto. */
+:root {
+  --bg: #f5f3f6;
+  --surface: #ffffff;
+  --sunk: #ece8ee;
+  --ink: #221c27;
+  --muted: #6c6474;
+  --line: #e0dae4;
+  --accent: #8a2d5c;
+  --accent-ink: #ffffff;
+  --accent-soft: #f3e3ec;
+  --good: #1d7f54;
+  --good-soft: #e1f2e9;
+  --warn: #9a6512;
+  --warn-soft: #f8ecd6;
+  --bad: #b83636;
+  --bad-soft: #f9e2e2;
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --f-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-num: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151218; --surface: #1f1a23; --sunk: #2a2430; --ink: #f1ecf4; --muted: #a89fb1;
+    --line: #362f3d; --accent: #e28bb6; --accent-ink: #2a0f1d; --accent-soft: #3a2230;
+    --good: #55c58f; --good-soft: #17342a; --warn: #e3a64b; --warn-soft: #3a2c15;
+    --bad: #f07a7a; --bad-soft: #3d1d1f; --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151218; --surface: #1f1a23; --sunk: #2a2430; --ink: #f1ecf4; --muted: #a89fb1;
+  --line: #362f3d; --accent: #e28bb6; --accent-ink: #2a0f1d; --accent-soft: #3a2230;
+  --good: #55c58f; --good-soft: #17342a; --warn: #e3a64b; --warn-soft: #3a2c15;
+  --bad: #f07a7a; --bad-soft: #3d1d1f; --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 var(--f-body); }
+.wrap { max-width: 920px; margin: 0 auto; padding-inline: 16px; padding-block: 0 48px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.2; }
+h2 { font-size: 1.45rem; }
+h3 { font-size: 1.1rem; }
+p { margin: 0; }
+.num { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: .82rem; }
+.eyebrow { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+
+header.top { padding-block: 22px 14px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: end; justify-content: space-between; }
+header.top h1 { font-size: 1.9rem; color: var(--accent); }
+header.top .sub { color: var(--muted); font-size: .9rem; }
+.period { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.period input { width: 12rem; max-width: 100%; }
+
+nav.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); margin-inline: -16px; padding-inline: 16px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { flex: none; border: 0; background: none; color: var(--muted); font: 600 .9rem var(--f-body); padding: 12px 10px; border-bottom: 2px solid transparent; cursor: pointer; }
+nav.tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+nav.tabs button:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+section.panel { display: flex; flex-direction: column; gap: 22px; padding-top: 20px; }
+.lead { max-width: 65ch; color: var(--muted); }
+.example-note { display: flex; gap: 10px; align-items: flex-start; background: var(--warn-soft); color: var(--ink); border-radius: var(--r); padding: 10px 14px; font-size: .88rem; }
+.example-note b { color: var(--warn); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; min-width: 0; }
+.block { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+/* KPIs */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.kpi .v { font-family: var(--f-num); font-size: 1.15rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.kpi .v.neg { color: var(--bad); }
+.kpi .v.pos { color: var(--good); }
+
+/* Veredictos */
+.verdicts { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.verdict { border-radius: var(--r); padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start; border: 1px solid var(--line); background: var(--surface); }
+.pill { flex: none; font: 700 .7rem var(--f-body); letter-spacing: .06em; text-transform: uppercase; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.verdict h3 { font-family: var(--f-body); font-weight: 600; font-size: .95rem; }
+.verdict p { font-size: .86rem; color: var(--muted); }
+
+/* Tablas */
+.tscroll { overflow-x: auto; min-width: 0; }
+table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+th, td { padding: 7px 8px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; white-space: normal; }
+thead th { font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+td:first-child { font-family: var(--f-body); }
+tr.total td { font-weight: 600; border-bottom: 2px solid var(--ink); }
+tr.sub td { color: var(--muted); }
+tr.hl td { background: var(--accent-soft); }
+td.neg { color: var(--bad); }
+td.pos { color: var(--good); }
+
+/* Formularios */
+label.f { display: flex; flex-direction: column; justify-content: space-between; gap: 3px; font-size: .78rem; color: var(--muted); font-weight: 500; min-width: 0; }
+input, select, textarea { font: 500 .95rem var(--f-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: 100%; min-width: 0; }
+input[type="number"] { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+input[type="range"] { padding: 0; accent-color: var(--accent); background: none; border: 0; }
+.grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.prod { display: flex; flex-direction: column; gap: 12px; }
+.prod-head { display: flex; gap: 10px; align-items: end; }
+.prod-head label { flex: 1; }
+.prod-head input { font-family: var(--f-display); font-size: 1.05rem; }
+.calc { display: grid; gap: 6px 14px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); background: var(--sunk); border-radius: 8px; padding: 10px 12px; font-size: .84rem; }
+.calc div { display: flex; justify-content: space-between; gap: 8px; }
+.calc span:last-child { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+.btn { font: 600 .9rem var(--f-body); border-radius: 8px; padding: 9px 14px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn.quiet { background: transparent; border-color: var(--line); color: var(--muted); padding: 7px 10px; }
+.btn.danger { background: transparent; border-color: var(--bad); color: var(--bad); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.gasto { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) auto; gap: 8px; align-items: end; padding-block: 8px; border-bottom: 1px solid var(--line); }
+@media (max-width: 560px) {
+  .gasto { grid-template-columns: 1fr 1fr; }
+  .gasto .gname { grid-column: 1 / -1; }
+}
+
+/* Barras HTML */
+.bars { display: flex; flex-direction: column; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 9rem) minmax(0, 1fr); gap: 10px; align-items: center; font-size: .85rem; }
+.bar-track { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.bar { height: 14px; border-radius: 0 4px 4px 0; min-width: 2px; position: relative; }
+.bar-line { display: flex; align-items: center; gap: 8px; }
+.bar-line .num { font-size: .78rem; color: var(--ink); white-space: nowrap; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .8rem; color: var(--muted); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 5px; }
+
+/* Gráfico CVU */
+.chart { position: relative; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart text { fill: var(--muted); font: 11px var(--f-body); }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: .8rem; box-shadow: 0 4px 16px rgb(0 0 0 / .12); min-width: 170px; }
+.tip div { display: flex; justify-content: space-between; gap: 12px; }
+.tip b { font-weight: 600; }
+
+/* Escenarios */
+.slider { display: grid; grid-template-columns: minmax(0, 1fr) 4.5rem; gap: 4px 10px; align-items: center; }
+.slider label { grid-column: 1 / -1; font-size: .85rem; font-weight: 500; }
+.slider output { font-family: var(--f-num); text-align: right; font-size: .9rem; }
+
+ol.plan { margin: 0; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 8px; max-width: 70ch; }
+ol.plan li::marker { color: var(--accent); font-weight: 700; }
+.formula { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.formula div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .86rem; }
+.formula code { display: block; font-family: var(--f-num); font-size: .8rem; color: var(--accent); margin-top: 4px; overflow-wrap: anywhere; }
+textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resize: vertical; }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 9px 16px; border-radius: 999px; font-size: .88rem; z-index: 20; }
+.confirm { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: var(--bad-soft); border-radius: 8px; padding: 10px 12px; font-size: .88rem; }
+@media (prefers-reduced-motion: no-preference) { .bar { transition: width .3s ease; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Contaduría Pública · Análisis de costos</p>
+      <h1>Bella Cristal</h1>
+      <p class="sub">Costos, margen de contribución y punto de equilibrio de las pijamas</p>
+    </div>
+    <label class="f period">Periodo analizado
+      <input id="periodo" type="text">
+    </label>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button role="tab" data-tab="diag" aria-selected="true">Diagnóstico</button>
+    <button role="tab" data-tab="prod" aria-selected="false">Productos</button>
+    <button role="tab" data-tab="gast" aria-selected="false">Gastos</button>
+    <button role="tab" data-tab="esc" aria-selected="false">Escenarios</button>
+    <button role="tab" data-tab="mkt" aria-selected="false">Marketing</button>
+    <button role="tab" data-tab="datos" aria-selected="false">Datos y fórmulas</button>
+  </nav>
+
+  <!-- DIAGNÓSTICO -->
+  <section class="panel" id="tab-diag" role="tabpanel">
+    <div class="example-note" id="exampleNote"><span><b>Datos de ejemplo.</b> Las cifras cargadas son supuestas para mostrar el funcionamiento. Reemplácelas en Productos y Gastos con los registros reales de Bella Cristal; todo se recalcula solo y queda guardado en este dispositivo.</span></div>
+
+    <div class="block">
+      <p class="eyebrow">Contraste de la hipótesis</p>
+      <h2>¿Qué muestran los números?</h2>
+      <div class="verdicts" id="verdicts"></div>
+    </div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="block">
+      <h2>Estado de resultados del periodo</h2>
+      <p class="lead small">Formato de costeo variable: separa lo que cambia con cada pijama vendida de lo que se paga igual venda o no venda.</p>
+      <div class="card tscroll"><table id="er"></table></div>
+    </div>
+
+    <div class="block">
+      <h2>Costo, volumen y utilidad</h2>
+      <p class="lead small">Las ventas deben cruzar la línea de costos totales para dejar utilidad. El cruce es el punto de equilibrio.</p>
+      <div class="card">
+        <div class="legend" style="margin-bottom:8px"><span><i style="background:var(--s1)"></i>Ingresos</span><span><i style="background:var(--s2)"></i>Costos totales</span><span><i style="background:var(--s3)"></i>Costos y gastos fijos</span></div>
+        <div class="chart" id="cvu"></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Acciones propuestas</h2>
+      <p class="lead small">Se generan a partir de los resultados actuales (objetivo 5: control y optimización de gastos).</p>
+      <div class="card"><ol class="plan" id="plan"></ol></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section class="panel" id="tab-prod" role="tabpanel" hidden>
+    <div class="block">
+      <h2>Productos y costo unitario</h2>
+      <p class="lead small">Registre los costos directos de cada referencia y sus precios al detal y al por mayor. La comisión por medios de pago se aplica sobre el precio de venta.</p>
+      <div class="grid card">
+        <label class="f">Comisión medios de pago (% sobre venta)<input id="comision" type="number" step="0.1" min="0"></label>
+        <label class="f">Margen de contribución objetivo detal (%)<input id="objDetal" type="number" step="1" min="0" max="90"></label>
+        <label class="f">Margen de contribución objetivo mayor (%)<input id="objMayor" type="number" step="1" min="0" max="90"></label>
+      </div>
+    </div>
+    <div class="block" id="productos"></div>
+    <div class="row"><button class="btn ghost" id="addProd" type="button">Agregar producto</button></div>
+
+    <div class="block">
+      <h2>Margen de contribución por canal</h2>
+      <div class="card block">
+        <div class="legend"><span><i style="background:var(--s1)"></i>Detal</span><span><i style="background:var(--s2)"></i>Por mayor</span></div>
+        <div class="bars" id="mcBars"></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Estructura de precios</h2>
+      <p class="lead small">Costo total unitario = costo variable + parte de los costos y gastos fijos que le corresponde a cada pijama según el volumen actual. Un precio por debajo de ese valor no recupera todos los gastos.</p>
+      <div class="card tscroll"><table id="precios"></table></div>
+    </div>
+  </section>
+
+  <!-- GASTOS -->
+  <section class="panel" id="tab-gast" role="tabpanel" hidden>
+    <div class="block">
+      <h2>Costos indirectos y gastos operativos</h2>
+      <p class="lead small">Valores mensuales fijos. Clasifíquelos para saber dónde se concentra el gasto. Los gastos personales de la propietaria se registran aparte y no se suman al negocio.</p>
+      <div class="card" id="gastos"></div>
+      <div class="row"><button class="btn ghost" id="addGasto" type="button">Agregar gasto</button></div>
+    </div>
+    <div class="block">
+      <h2>Composición del gasto fijo</h2>
+      <div class="card"><div class="bars" id="gastoBars"></div></div>
+    </div>
+  </section>
+
+  <!-- ESCENARIOS -->
+  <section class="panel" id="tab-esc" role="tabpanel" hidden>
+    <div class="block">
+      <h2>Simulador de decisiones</h2>
+      <p class="lead small">Mueva cada palanca y compare con la situación actual. Los datos originales no cambian.</p>
+      <div class="card grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <div class="slider"><label for="eP">Cambio en precios de venta</label><input id="eP" type="range" min="-30" max="40" step="1"><output id="eP_o"></output></div>
+        <div class="slider"><label for="eV">Cambio en unidades vendidas</label><input id="eV" type="range" min="-50" max="150" step="5"><output id="eV_o"></output></div>
+        <div class="slider"><label for="eC">Cambio en costo variable unitario</label><input id="eC" type="range" min="-30" max="30" step="1"><output id="eC_o"></output></div>
+        <div class="slider"><label for="eG">Cambio en gastos fijos</label><input id="eG" type="range" min="-50" max="30" step="1"><output id="eG_o"></output></div>
+      </div>
+      <div class="row"><button class="btn quiet" id="eReset" type="button">Volver a cero</button></div>
+      <div class="card tscroll"><table id="escTable"></table></div>
+    </div>
+
+    <div class="block">
+      <h2>Relación entre volumen de ventas y rentabilidad</h2>
+      <p class="lead small">Con los precios y costos actuales, ¿qué pasa si se vende más o menos?</p>
+      <div class="card tscroll"><table id="volTable"></table></div>
+    </div>
+
+    <div class="block">
+      <h2>Meta de utilidad</h2>
+      <div class="card grid">
+        <label class="f">Utilidad mensual deseada (COP)<input id="meta" type="number" step="50000" min="0"></label>
+        <div id="metaOut" class="small" style="align-self:center"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETING -->
+  <section class="panel" id="tab-mkt" role="tabpanel" hidden>
+    <div class="block">
+      <h2>Marketing digital y su efecto en la rentabilidad</h2>
+      <p class="lead small">Métricas del mes tomadas de Instagram, Facebook, TikTok, WhatsApp y la página web. Conectan el objetivo 1 (alcance, interacción y conversión) con el resultado financiero.</p>
+      <div class="card grid">
+        <label class="f">Alcance (personas)<input id="mAlc" type="number" min="0" step="100"></label>
+        <label class="f">Interacciones (reacciones, comentarios, guardados)<input id="mInt" type="number" min="0" step="10"></label>
+        <label class="f">Mensajes / consultas recibidas<input id="mMsg" type="number" min="0" step="1"></label>
+        <label class="f">Pedidos cerrados<input id="mPed" type="number" min="0" step="1"></label>
+        <label class="f">Clientas nuevas<input id="mNue" type="number" min="0" step="1"></label>
+        <label class="f">Inversión en pauta pagada (COP)<input id="mPauta" type="number" min="0" step="10000"></label>
+      </div>
+    </div>
+    <div class="kpis" id="mktKpis"></div>
+    <div class="verdicts" id="mktVerdicts"></div>
+  </section>
+
+  <!-- DATOS -->
+  <section class="panel" id="tab-datos" role="tabpanel" hidden>
+    <div class="block">
+      <h2>Resumen para el informe</h2>
+      <p class="lead small">Texto listo para pegar en el documento del proyecto, con las cifras actuales.</p>
+      <textarea id="resumen" readonly></textarea>
+      <div class="row"><button class="btn" id="copyResumen" type="button">Copiar resumen</button></div>
+    </div>
+    <div class="block">
+      <h2>Respaldo de los datos</h2>
+      <p class="lead small">Los datos se guardan en este navegador. Copie el respaldo para pasarlo a otro dispositivo o para enviarlo a su compañero; pegue un respaldo y presione Cargar para restaurarlo.</p>
+      <textarea id="backup" spellcheck="false"></textarea>
+      <div class="row">
+        <button class="btn" id="copyBackup" type="button">Copiar respaldo</button>
+        <button class="btn ghost" id="loadBackup" type="button">Cargar respaldo pegado</button>
+        <button class="btn danger" id="resetAll" type="button">Restablecer datos de ejemplo</button>
+      </div>
+      <div class="confirm" id="confirmReset" hidden>
+        <span>Se borrarán los datos que haya escrito. ¿Continuar?</span>
+        <button class="btn danger" id="confirmYes" type="button">Sí, restablecer</button>
+        <button class="btn quiet" id="confirmNo" type="button">Cancelar</button>
+      </div>
+    </div>
+    <div class="block">
+      <h2>Cómo se calcula</h2>
+      <div class="formula">
+        <div><b>Costo variable unitario</b><code>compra o confección + empaque + otros directos + (comisión % × precio)</code></div>
+        <div><b>Margen de contribución unitario</b><code>MCu = precio − costo variable unitario</code></div>
+        <div><b>Razón de margen de contribución</b><code>MC% = MCu ÷ precio</code></div>
+        <div><b>Costos y gastos fijos</b><code>CF = costos indirectos + administración + ventas + financieros</code></div>
+        <div><b>Punto de equilibrio en unidades</b><code>PEu = CF ÷ MCu promedio ponderado</code></div>
+        <div><b>Punto de equilibrio en pesos</b><code>PE$ = CF ÷ MC% ponderado</code></div>
+        <div><b>Margen de seguridad</b><code>(ventas − PE$) ÷ ventas</code></div>
+        <div><b>Utilidad operacional</b><code>MC total − CF</code></div>
+        <div><b>Margen de utilidad</b><code>utilidad operacional ÷ ventas</code></div>
+        <div><b>Costo total unitario</b><code>costo variable + CF ÷ unidades vendidas</code></div>
+        <div><b>Precio sugerido</b><code>(costo directo) ÷ (1 − MC% objetivo − comisión %)</code></div>
+        <div><b>Unidades para meta</b><code>(CF + utilidad deseada) ÷ MCu ponderado</code></div>
+        <div><b>Costo de adquisición de clienta</b><code>CAC = pauta ÷ clientas nuevas</code></div>
+        <div><b>Retorno de la pauta</b><code>ROAS = ventas ÷ pauta</code></div>
+      </div>
+      <p class="small muted">Base teórica: modelo costo-volumen-utilidad (Horngren; INCP, 2018). El análisis multiproducto supone que la mezcla de ventas entre referencias y canales se mantiene.</p>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+  var KEY = "bellaCristal.costos.v1";
+
+  var CATS = {
+    cif: "Costo indirecto",
+    adm: "Gasto de administración",
+    ven: "Gasto de ventas",
+    fin: "Gasto financiero",
+    per: "Personal (no del negocio)"
+  };
+
+  function ejemplo() {
+    return {
+      ejemplo: true,
+      periodo: "Agosto 2026",
+      comision: 3.5,
+      objDetal: 45,
+      objMayor: 25,
+      meta: 800000,
+      productos: [
+        { id: "p1", nombre: "Pijama short algodón", costo: 28000, empaque: 2500, otros: 3000, pDetal: 55000, pMayor: 40000, uDetal: 40, uMayor: 25 },
+        { id: "p2", nombre: "Pijama pantalón largo", costo: 38000, empaque: 2500, otros: 3000, pDetal: 75000, pMayor: 52000, uDetal: 25, uMayor: 15 },
+        { id: "p3", nombre: "Pijama satín con encaje", costo: 42000, empaque: 3000, otros: 3000, pDetal: 85000, pMayor: 58000, uDetal: 15, uMayor: 10 }
+      ],
+      gastos: [
+        { id: "g1", nombre: "Arriendo (proporción bodega en casa)", cat: "cif", valor: 400000 },
+        { id: "g2", nombre: "Servicios públicos (proporción)", cat: "cif", valor: 150000 },
+        { id: "g3", nombre: "Remuneración de la propietaria", cat: "adm", valor: 1300000 },
+        { id: "g4", nombre: "Honorarios contables", cat: "adm", valor: 150000 },
+        { id: "g5", nombre: "Internet y plan celular", cat: "adm", valor: 90000 },
+        { id: "g6", nombre: "Publicidad pagada en redes", cat: "ven", valor: 600000 },
+        { id: "g7", nombre: "Página web y dominio", cat: "ven", valor: 80000 },
+        { id: "g8", nombre: "Mensajería local y domicilios", cat: "ven", valor: 120000 },
+        { id: "g9", nombre: "Comisiones bancarias y 4×1000", cat: "fin", valor: 35000 },
+        { id: "g10", nombre: "Mercado del hogar pagado con caja del negocio", cat: "per", valor: 250000 }
+      ],
+      mkt: { alc: 18000, int: 540, msg: 160, ped: 70, nue: 38, pauta: 600000 },
+      esc: { p: 0, v: 0, c: 0, g: 0 }
+    };
+  }
+
+  var S;
+  try { S = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { S = null; }
+  if (!S || !Array.isArray(S.productos)) S = ejemplo();
+  S.esc = S.esc || { p: 0, v: 0, c: 0, g: 0 };
+  S.mkt = S.mkt || ejemplo().mkt;
+
+  var saveTimer;
+  function save() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+    }, 250);
+  }
+
+  // ---------- formato ----------
+  var fmtCOP = new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
+  var fmtN = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 });
+  var fmtN1 = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 1 });
+  function $(id) { return document.getElementById(id); }
+  function cop(v) { return isFinite(v) ? fmtCOP.format(Math.round(v)) : "—"; }
+  function pct(v) { return isFinite(v) ? fmtN1.format(v * 100) + " %" : "—"; }
+  function n(v) { return isFinite(v) ? fmtN.format(v) : "—"; }
+  function num(v) { v = parseFloat(v); return isFinite(v) ? v : 0; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function cls(v) { return v < 0 ? "neg" : ""; }
+
+  // ---------- cálculo ----------
+  function calc(f) {
+    f = f || { p: 0, v: 0, c: 0, g: 0 };
+    var kp = 1 + f.p / 100, kv = 1 + f.v / 100, kc = 1 + f.c / 100, kg = 1 + f.g / 100;
+    var com = num(S.comision) / 100;
+    var r = { lineas: [], ventas: 0, cvCompra: 0, cvEmp: 0, cvOtros: 0, cvCom: 0, cv: 0, mc: 0, uds: 0, gastoCat: { cif: 0, adm: 0, ven: 0, fin: 0, per: 0 } };
+    S.productos.forEach(function (p) {
+      var dir = (num(p.costo) + num(p.empaque) + num(p.otros)) * kc;
+      [["Detal", num(p.pDetal), num(p.uDetal)], ["Mayor", num(p.pMayor), num(p.uMayor)]].forEach(function (c) {
+        var precio = c[1] * kp, u = c[2] * kv;
+        var cvu = dir + precio * com;
+        var l = { prod: p, canal: c[0], precio: precio, u: u, dir: dir, cvu: cvu, mcu: precio - cvu, mcp: precio ? (precio - cvu) / precio : NaN };
+        l.ventas = precio * u; l.mc = l.mcu * u;
+        r.lineas.push(l);
+        r.ventas += l.ventas; r.mc += l.mc; r.uds += u;
+        r.cvCompra += num(p.costo) * kc * u; r.cvEmp += num(p.empaque) * kc * u; r.cvOtros += num(p.otros) * kc * u; r.cvCom += precio * com * u;
+      });
+    });
+    r.cv = r.ventas - r.mc;
+    S.gastos.forEach(function (g) { if (r.gastoCat[g.cat] !== undefined) r.gastoCat[g.cat] += num(g.valor) * (g.cat === "per" ? 1 : kg); });
+    var gc = r.gastoCat;
+    r.cf = gc.cif + gc.adm + gc.ven + gc.fin;
+    r.uo = r.mc - r.cf;
+    r.margenU = r.ventas ? r.uo / r.ventas : NaN;
+    r.mcPct = r.ventas ? r.mc / r.ventas : NaN;
+    r.mcuProm = r.uds ? r.mc / r.uds : NaN;
+    r.precioProm = r.uds ? r.ventas / r.uds : NaN;
+    r.cvuProm = r.uds ? r.cv / r.uds : NaN;
+    r.peU = r.mcuProm > 0 ? r.cf / r.mcuProm : Infinity;
+    r.pePesos = r.mcPct > 0 ? r.cf / r.mcPct : Infinity;
+    r.mSeg = r.ventas && isFinite(r.pePesos) ? (r.ventas - r.pePesos) / r.ventas : NaN;
+    r.cfU = r.uds ? r.cf / r.uds : NaN;
+    r.lineas.forEach(function (l) { l.ctu = l.cvu + r.cfU; l.utu = l.precio - l.ctu; });
+    return r;
+  }
+
+  // ---------- pestañas ----------
+  var tabs = document.querySelectorAll("nav.tabs button");
+  function showTab(t) {
+    tabs.forEach(function (b) { b.setAttribute("aria-selected", b.dataset.tab === t ? "true" : "false"); });
+    document.querySelectorAll("section.panel").forEach(function (s) { s.hidden = s.id !== "tab-" + t; });
+    try { localStorage.setItem(KEY + ".tab", t); } catch (e) {}
+  }
+  tabs.forEach(function (b) { b.addEventListener("click", function () { showTab(b.dataset.tab); window.scrollTo({ top: 0 }); }); });
+  var startTab = (location.hash || "").slice(1);
+  if (!document.getElementById("tab-" + startTab)) { try { startTab = localStorage.getItem(KEY + ".tab") || "diag"; } catch (e) { startTab = "diag"; } }
+  if (!document.getElementById("tab-" + startTab)) startTab = "diag";
+  showTab(startTab);
+
+  // ---------- formularios de productos ----------
+  var PF = [
+    ["costo", "Costo de compra o confección", 500],
+    ["empaque", "Empaque, bolsa y etiqueta", 100],
+    ["otros", "Otros directos (envío asumido, obsequio)", 100],
+    ["pDetal", "Precio al detal", 1000],
+    ["pMayor", "Precio por mayor", 1000],
+    ["uDetal", "Unidades vendidas detal / mes", 1],
+    ["uMayor", "Unidades vendidas mayor / mes", 1]
+  ];
+  function renderProductos() {
+    var box = $("productos");
+    box.innerHTML = S.productos.map(function (p) {
+      return '<div class="card prod" data-id="' + p.id + '">' +
+        '<div class="prod-head"><label class="f">Referencia<input id="' + p.id + '-nombre" data-k="nombre" type="text" value="' + esc(p.nombre) + '"></label>' +
+        '<button class="btn quiet" type="button" data-del="' + p.id + '" aria-label="Eliminar ' + esc(p.nombre) + '">Eliminar</button></div>' +
+        '<div class="grid">' + PF.map(function (f) {
+          return '<label class="f">' + f[1] + '<input id="' + p.id + '-' + f[0] + '" data-k="' + f[0] + '" type="number" min="0" step="' + f[2] + '" inputmode="decimal" value="' + num(p[f[0]]) + '"></label>';
+        }).join("") + '</div>' +
+        '<div class="calc" id="' + p.id + '-calc"></div></div>';
+    }).join("");
+  }
+  $("productos").addEventListener("input", function (e) {
+    var card = e.target.closest(".prod"); if (!card || !e.target.dataset.k) return;
+    var p = S.productos.find(function (x) { return x.id === card.dataset.id; });
+    p[e.target.dataset.k] = e.target.dataset.k === "nombre" ? e.target.value : num(e.target.value);
+    changed();
+  });
+  $("productos").addEventListener("click", function (e) {
+    var id = e.target.dataset && e.target.dataset.del; if (!id) return;
+    S.productos = S.productos.filter(function (x) { return x.id !== id; });
+    renderProductos(); changed(); toast("Producto eliminado");
+  });
+  $("addProd").addEventListener("click", function () {
+    var id = "p" + Date.now().toString(36);
+    S.productos.push({ id: id, nombre: "Nueva referencia", costo: 0, empaque: 0, otros: 0, pDetal: 0, pMayor: 0, uDetal: 0, uMayor: 0 });
+    renderProductos(); changed();
+    var el = $(id + "-nombre"); if (el) { el.focus(); el.select(); }
+  });
+
+  // ---------- formularios de gastos ----------
+  function renderGastos() {
+    $("gastos").innerHTML = S.gastos.map(function (g) {
+      return '<div class="gasto" data-id="' + g.id + '">' +
+        '<label class="f gname">Concepto<input id="' + g.id + '-nombre" data-k="nombre" type="text" value="' + esc(g.nombre) + '"></label>' +
+        '<label class="f">Clasificación<select id="' + g.id + '-cat" data-k="cat">' + Object.keys(CATS).map(function (c) {
+          return '<option value="' + c + '"' + (g.cat === c ? " selected" : "") + '>' + CATS[c] + '</option>';
+        }).join("") + '</select></label>' +
+        '<label class="f">Valor mensual<input id="' + g.id + '-valor" data-k="valor" type="number" min="0" step="10000" inputmode="decimal" value="' + num(g.valor) + '"></label>' +
+        '<button class="btn quiet" type="button" data-del="' + g.id + '" aria-label="Eliminar ' + esc(g.nombre) + '">Quitar</button></div>';
+    }).join("") || '<p class="muted small">Sin gastos registrados. Use Agregar gasto.</p>';
+  }
+  function onGasto(e) {
+    var row = e.target.closest(".gasto"); if (!row || !e.target.dataset.k) return;
+    var g = S.gastos.find(function (x) { return x.id === row.dataset.id; });
+    var k = e.target.dataset.k;
+    g[k] = k === "valor" ? num(e.target.value) : e.target.value;
+    changed();
+  }
+  $("gastos").addEventListener("input", onGasto);
+  $("gastos").addEventListener("change", onGasto);
+  $("gastos").addEventListener("click", function (e) {
+    var id = e.target.dataset && e.target.dataset.del; if (!id) return;
+    S.gastos = S.gastos.filter(function (x) { return x.id !== id; });
+    renderGastos(); changed(); toast("Gasto quitado");
+  });
+  $("addGasto").addEventListener("click", function () {
+    var id = "g" + Date.now().toString(36);
+    S.gastos.push({ id: id, nombre: "Nuevo gasto", cat: "adm", valor: 0 });
+    renderGastos(); changed();
+    var el = $(id + "-nombre"); if (el) { el.focus(); el.select(); }
+  });
+
+  // ---------- campos simples ----------
+  var simple = [["periodo", "periodo", false], ["comision", "comision", true], ["objDetal", "objDetal", true], ["objMayor", "objMayor", true], ["meta", "meta", true]];
+  var mktF = [["mAlc", "alc"], ["mInt", "int"], ["mMsg", "msg"], ["mPed", "ped"], ["mNue", "nue"], ["mPauta", "pauta"]];
+  var escF = [["eP", "p"], ["eV", "v"], ["eC", "c"], ["eG", "g"]];
+  function fillSimple() {
+    simple.forEach(function (s) { $(s[0]).value = S[s[1]] == null ? "" : S[s[1]]; });
+    mktF.forEach(function (m) { $(m[0]).value = num(S.mkt[m[1]]); });
+    escF.forEach(function (m) { $(m[0]).value = num(S.esc[m[1]]); });
+  }
+  simple.forEach(function (s) { $(s[0]).addEventListener("input", function (e) { S[s[1]] = s[2] ? num(e.target.value) : e.target.value; changed(); }); });
+  mktF.forEach(function (m) { $(m[0]).addEventListener("input", function (e) { S.mkt[m[1]] = num(e.target.value); changed(); }); });
+  escF.forEach(function (m) { $(m[0]).addEventListener("input", function (e) { S.esc[m[1]] = num(e.target.value); changed(); }); });
+  $("eReset").addEventListener("click", function () { S.esc = { p: 0, v: 0, c: 0, g: 0 }; fillSimple(); changed(); });
+
+  // ---------- render de resultados ----------
+  function verdictHTML(v) {
+    return '<div class="verdict"><span class="pill ' + v[0] + '">' + v[1] + '</span><div><h3>' + v[2] + '</h3><p>' + v[3] + '</p></div></div>';
+  }
+
+  function render() {
+    var r = calc();
+    var gc = r.gastoCat;
+    $("exampleNote").hidden = !S.ejemplo;
+
+    // Veredictos de hipótesis
+    var bajoCosto = r.lineas.filter(function (l) { return l.u > 0 && l.utu < 0; });
+    var mayorDebil = r.lineas.filter(function (l) { return l.canal === "Mayor" && l.precio > 0 && l.mcp < num(S.objMayor) / 100; });
+    var opPeso = r.ventas ? (gc.adm + gc.ven + gc.fin) / r.ventas : NaN;
+    var V = [];
+    V.push(r.uo < 0
+      ? ["bad", "Se confirma", "Los gastos superan los ingresos", "Ventas de " + cop(r.ventas) + " frente a costos y gastos de " + cop(r.cv + r.cf) + ". Pérdida operacional de " + cop(-r.uo) + "."]
+      : ["good", "No se confirma", "Los ingresos cubren los costos y gastos", "Utilidad operacional de " + cop(r.uo) + " (" + pct(r.margenU) + " de las ventas)."]);
+    V.push(bajoCosto.length
+      ? ["bad", "Se confirma", "Hay precios que no cubren el costo total", bajoCosto.length + " de " + r.lineas.filter(function (l) { return l.u > 0; }).length + " combinaciones producto-canal se venden por debajo de su costo total unitario: " + bajoCosto.map(function (l) { return esc(l.prod.nombre) + " (" + l.canal.toLowerCase() + ")"; }).join(", ") + "."]
+      : ["good", "No se confirma", "Todos los precios cubren el costo total", "Cada referencia recupera su costo variable y su parte de los gastos fijos."]);
+    V.push(r.uds >= r.peU
+      ? ["good", "Cumple", "Se supera el punto de equilibrio", "Se venden " + n(r.uds) + " unidades y el equilibrio está en " + n(Math.ceil(r.peU)) + "."]
+      : ["bad", "No cumple", "No se alcanza el punto de equilibrio", "Se venden " + n(r.uds) + " unidades; se necesitan " + (isFinite(r.peU) ? n(Math.ceil(r.peU)) : "más margen por unidad") + " para no perder dinero."]);
+    V.push(mayorDebil.length
+      ? ["warn", "Revisar", "Margen mayorista por debajo del objetivo", mayorDebil.map(function (l) { return esc(l.prod.nombre) + " " + pct(l.mcp); }).join(" · ") + ". Objetivo: " + n(S.objMayor) + " %."]
+      : ["good", "Cumple", "Margen mayorista dentro del objetivo", "Todas las referencias superan el " + n(S.objMayor) + " % al por mayor."]);
+    V.push(opPeso > 0.35
+      ? ["warn", "Revisar", "Gastos operativos altos frente a ventas", "Administración, ventas y financieros equivalen al " + pct(opPeso) + " de las ventas."]
+      : ["good", "Controlado", "Gastos operativos proporcionados", "Equivalen al " + pct(opPeso) + " de las ventas."]);
+    if (gc.per > 0) V.push(["warn", "Revisar", "Gastos personales pagados con dinero del negocio", cop(gc.per) + " del mes. Se excluyen del análisis, pero reducen la caja disponible."]);
+    $("verdicts").innerHTML = V.map(verdictHTML).join("");
+
+    // KPIs
+    $("kpis").innerHTML = [
+      ["Ventas del mes", cop(r.ventas), ""],
+      ["Margen de contribución", cop(r.mc) + " · " + pct(r.mcPct), ""],
+      ["Costos y gastos fijos", cop(r.cf), ""],
+      ["Utilidad operacional", cop(r.uo), r.uo < 0 ? "neg" : "pos"],
+      ["Margen de utilidad", pct(r.margenU), r.margenU < 0 ? "neg" : "pos"],
+      ["Punto de equilibrio", (isFinite(r.peU) ? n(Math.ceil(r.peU)) + " uds" : "—") + " · " + cop(r.pePesos), ""],
+      ["Unidades vendidas", n(r.uds), ""],
+      ["Margen de seguridad", pct(r.mSeg), r.mSeg < 0 ? "neg" : "pos"]
+    ].map(function (k) { return '<div class="kpi"><span class="eyebrow">' + k[0] + '</span><span class="v ' + k[2] + '">' + k[1] + '</span></div>'; }).join("");
+
+    // Estado de resultados
+    function rr(label, v, c) { return '<tr class="' + (c || "") + '"><td>' + label + '</td><td class="' + cls(v) + '">' + cop(v) + '</td><td>' + (r.ventas ? pct(v / r.ventas) : "—") + '</td></tr>'; }
+    $("er").innerHTML = '<thead><tr><th>Concepto</th><th>Valor</th><th>% ventas</th></tr></thead><tbody>' +
+      rr("Ingresos por ventas", r.ventas, "total") +
+      rr("(−) Costo de compra o confección", -r.cvCompra, "sub") +
+      rr("(−) Empaque y etiqueta", -r.cvEmp, "sub") +
+      rr("(−) Otros costos directos", -r.cvOtros, "sub") +
+      rr("(−) Comisiones medios de pago", -r.cvCom, "sub") +
+      rr("Margen de contribución", r.mc, "total") +
+      rr("(−) Costos indirectos fijos", -gc.cif, "sub") +
+      rr("(−) Gastos de administración", -gc.adm, "sub") +
+      rr("(−) Gastos de ventas", -gc.ven, "sub") +
+      rr("(−) Gastos financieros", -gc.fin, "sub") +
+      rr("Utilidad operacional", r.uo, "total hl") +
+      (gc.per ? '<tr class="sub"><td>Gastos personales registrados (excluidos)</td><td>' + cop(gc.per) + '</td><td></td></tr>' : "") +
+      '</tbody>';
+
+    // Productos: cálculos por tarjeta
+    S.productos.forEach(function (p) {
+      var el = $(p.id + "-calc"); if (!el) return;
+      var d = r.lineas.filter(function (l) { return l.prod === p; });
+      el.innerHTML = d.map(function (l) {
+        return '<div><span>Costo variable ' + l.canal.toLowerCase() + '</span><span>' + cop(l.cvu) + '</span></div>' +
+          '<div><span>MC unitario ' + l.canal.toLowerCase() + '</span><span class="' + (l.mcu < 0 ? "neg" : "") + '">' + cop(l.mcu) + ' · ' + pct(l.mcp) + '</span></div>' +
+          '<div><span>Costo total unitario ' + l.canal.toLowerCase() + '</span><span>' + cop(l.ctu) + '</span></div>';
+      }).join("");
+    });
+
+    // Barras MC%
+    var maxMc = Math.max.apply(null, r.lineas.map(function (l) { return isFinite(l.mcp) ? Math.abs(l.mcp) : 0; }).concat([0.01]));
+    $("mcBars").innerHTML = S.productos.map(function (p) {
+      var d = r.lineas.filter(function (l) { return l.prod === p; });
+      return '<div class="bar-row"><span>' + esc(p.nombre) + '</span><div class="bar-track">' + d.map(function (l, i) {
+        var w = isFinite(l.mcp) ? Math.max(0, l.mcp) / maxMc * 100 : 0;
+        return '<div class="bar-line" title="' + esc(p.nombre) + ' ' + l.canal.toLowerCase() + ': MC ' + pct(l.mcp) + ' (' + cop(l.mcu) + ' por unidad)"><div class="bar" style="width:calc(' + w.toFixed(1) + '% - 4.5rem);background:var(--s' + (i + 1) + ')"></div><span class="num">' + pct(l.mcp) + '</span></div>';
+      }).join("") + '</div></div>';
+    }).join("");
+
+    // Tabla de precios
+    var objD = num(S.objDetal) / 100, objM = num(S.objMayor) / 100, com = num(S.comision) / 100;
+    $("precios").innerHTML = '<thead><tr><th>Referencia · canal</th><th>Precio actual</th><th>Costo variable</th><th>Costo total</th><th>Utilidad por unidad</th><th>Precio sugerido</th></tr></thead><tbody>' +
+      r.lineas.map(function (l) {
+        var obj = l.canal === "Detal" ? objD : objM;
+        var den = 1 - obj - com;
+        var sug = den > 0 ? l.dir / den : NaN;
+        var sugR = isFinite(sug) ? Math.ceil(sug / 1000) * 1000 : NaN;
+        return '<tr><td>' + esc(l.prod.nombre) + ' · ' + l.canal.toLowerCase() + '</td><td>' + cop(l.precio) + '</td><td>' + cop(l.cvu) + '</td><td>' + cop(l.ctu) + '</td><td class="' + (l.utu < 0 ? "neg" : "pos") + '">' + cop(l.utu) + '</td><td>' + cop(sugR) + '</td></tr>';
+      }).join("") + '</tbody>';
+
+    // Gastos: composición
+    var cats = ["cif", "adm", "ven", "fin"];
+    var maxG = Math.max.apply(null, cats.map(function (c) { return gc[c]; }).concat([1]));
+    $("gastoBars").innerHTML = cats.map(function (c) {
+      return '<div class="bar-row"><span>' + CATS[c] + '</span><div class="bar-line" title="' + CATS[c] + ': ' + cop(gc[c]) + '"><div class="bar" style="width:calc(' + (gc[c] / maxG * 100).toFixed(1) + '% - 8rem);background:var(--accent)"></div><span class="num">' + cop(gc[c]) + ' · ' + (r.cf ? pct(gc[c] / r.cf) : "—") + '</span></div></div>';
+    }).join("") + '<p class="small muted">Total fijo del negocio: <span class="num">' + cop(r.cf) + '</span>' + (gc.per ? ' · Personal excluido: <span class="num">' + cop(gc.per) + '</span>' : "") + '</p>';
+
+    // Escenario
+    var e = calc(S.esc);
+    $("eP_o").textContent = (S.esc.p > 0 ? "+" : "") + S.esc.p + " %";
+    $("eV_o").textContent = (S.esc.v > 0 ? "+" : "") + S.esc.v + " %";
+    $("eC_o").textContent = (S.esc.c > 0 ? "+" : "") + S.esc.c + " %";
+    $("eG_o").textContent = (S.esc.g > 0 ? "+" : "") + S.esc.g + " %";
+    function er(label, a, b, f) { f = f || cop; return '<tr><td>' + label + '</td><td class="' + cls(a) + '">' + f(a) + '</td><td class="' + cls(b) + '">' + f(b) + '</td></tr>'; }
+    $("escTable").innerHTML = '<thead><tr><th>Indicador</th><th>Actual</th><th>Escenario</th></tr></thead><tbody>' +
+      er("Unidades vendidas", r.uds, e.uds, n) + er("Ventas", r.ventas, e.ventas) + er("Margen de contribución", r.mc, e.mc) +
+      er("Razón de MC", r.mcPct, e.mcPct, pct) + er("Costos y gastos fijos", r.cf, e.cf) +
+      '<tr class="hl"><td>Utilidad operacional</td><td class="' + cls(r.uo) + '">' + cop(r.uo) + '</td><td class="' + cls(e.uo) + '">' + cop(e.uo) + '</td></tr>' +
+      er("Margen de utilidad", r.margenU, e.margenU, pct) +
+      er("Punto de equilibrio (uds)", Math.ceil(r.peU), Math.ceil(e.peU), n) + er("Punto de equilibrio ($)", r.pePesos, e.pePesos) + '</tbody>';
+
+    // Volumen vs rentabilidad
+    var steps = [0.5, 0.75, 1, 1.25, 1.5, 2, 2.5];
+    $("volTable").innerHTML = '<thead><tr><th>Volumen</th><th>Unidades</th><th>Ventas</th><th>Utilidad</th><th>Margen</th></tr></thead><tbody>' +
+      steps.map(function (k) {
+        var x = calc({ p: 0, v: (k - 1) * 100, c: 0, g: 0 });
+        return '<tr class="' + (k === 1 ? "hl" : "") + '"><td>' + (k === 1 ? "Actual" : n(k * 100) + " %") + '</td><td>' + n(x.uds) + '</td><td>' + cop(x.ventas) + '</td><td class="' + (x.uo < 0 ? "neg" : "pos") + '">' + cop(x.uo) + '</td><td>' + pct(x.margenU) + '</td></tr>';
+      }).join("") + '</tbody>';
+
+    // Meta
+    var uMeta = r.mcuProm > 0 ? (r.cf + num(S.meta)) / r.mcuProm : Infinity;
+    $("metaOut").innerHTML = isFinite(uMeta)
+      ? 'Se necesitan <b class="num">' + n(Math.ceil(uMeta)) + '</b> unidades al mes (<span class="num">' + cop(uMeta * r.precioProm) + '</span> en ventas), es decir <b class="num">' + n(Math.max(0, Math.ceil(uMeta - r.uds))) + '</b> más que hoy, con la mezcla actual de productos.'
+      : "Con el margen actual cada unidad vendida no aporta contribución; primero hay que ajustar precios o costos.";
+
+    // Marketing
+    var m = S.mkt;
+    var tInt = m.alc ? m.int / m.alc : NaN, tMsg = m.msg ? m.ped / m.msg : NaN, tAlc = m.alc ? m.ped / m.alc : NaN;
+    var cac = m.nue ? m.pauta / m.nue : NaN, roas = m.pauta ? r.ventas / m.pauta : NaN;
+    var mcPed = m.ped ? r.mc / m.ped : NaN;
+    $("mktKpis").innerHTML = [
+      ["Tasa de interacción", pct(tInt)], ["Conversión mensajes → pedidos", pct(tMsg)], ["Conversión alcance → pedidos", pct(tAlc)],
+      ["Costo por clienta nueva (CAC)", cop(cac)], ["Ventas por cada $1 de pauta (ROAS)", isFinite(roas) ? fmtN1.format(roas) + " ×" : "—"], ["Margen de contribución por pedido", cop(mcPed)]
+    ].map(function (k) { return '<div class="kpi"><span class="eyebrow">' + k[0] + '</span><span class="v">' + k[1] + '</span></div>'; }).join("");
+    var MV = [];
+    MV.push(tInt < 0.03 ? ["warn", "Bajo", "Interacción por debajo del 3 %", "El contenido llega pero no genera respuesta. Pruebe videos cortos de prueba de producto, encuestas y testimonios."] : ["good", "Adecuado", "Interacción sana", "El contenido genera respuesta del público."]);
+    MV.push(tMsg < 0.5 ? ["warn", "Revisar", "Se pierden la mayoría de las consultas", "Solo " + pct(tMsg) + " de los mensajes termina en pedido. Respuestas rápidas, catálogo de WhatsApp y precios visibles ayudan a cerrar."] : ["good", "Adecuado", "Buen cierre de consultas", pct(tMsg) + " de los mensajes se convierte en pedido."]);
+    MV.push(cac > mcPed ? ["bad", "No rentable", "Cada clienta nueva cuesta más de lo que deja", "CAC de " + cop(cac) + " frente a un margen de " + cop(mcPed) + " por pedido. La pauta solo se paga con compras repetidas."] : ["good", "Rentable", "La pauta se recupera en el primer pedido", "CAC de " + cop(cac) + " frente a un margen de " + cop(mcPed) + " por pedido."]);
+    $("mktVerdicts").innerHTML = MV.map(verdictHTML).join("");
+
+    // Plan de acción
+    var A = [];
+    if (mayorDebil.length) A.push("Ajustar el precio por mayor de " + mayorDebil.map(function (l) {
+      var den = 1 - objM - com; return esc(l.prod.nombre) + " a " + cop(Math.ceil(l.dir / den / 1000) * 1000);
+    }).join(", ") + " o exigir un pedido mínimo mayorista que justifique el descuento.");
+    if (bajoCosto.length) A.push("Revisar la estructura de precios de las referencias que no cubren su costo total; usar el precio sugerido de la pestaña Productos como piso de negociación.");
+    if (r.uds < r.peU && isFinite(r.peU)) A.push("Fijar como meta mensual mínima " + n(Math.ceil(r.peU)) + " unidades (punto de equilibrio) y hacer seguimiento semanal de ventas contra esa meta.");
+    if (gc.per > 0) A.push("Separar las cuentas personales de las del negocio y asignar a la propietaria una remuneración fija; los " + cop(gc.per) + " de gastos personales salen hoy de la caja del emprendimiento.");
+    if (cac > mcPed) A.push("Redirigir la pauta pagada hacia clientas que ya compraron (remarketing, base de datos con autorización según la Ley 1581 de 2012) y medir el costo por pedido antes de aumentar el presupuesto.");
+    if (opPeso > 0.35) {
+      var mayorG = S.gastos.filter(function (g) { return g.cat !== "per"; }).sort(function (a, b) { return num(b.valor) - num(a.valor); }).slice(0, 2);
+      A.push("Presupuestar cada gasto operativo y revisar primero los de mayor peso: " + mayorG.map(function (g) { return esc(g.nombre) + " (" + cop(num(g.valor)) + ")"; }).join(" y ") + ".");
+    }
+    A.push("Llevar un registro mensual de ingresos, costos y gastos soportado en facturas (Estatuto Tributario, art. 615) y actualizar esta herramienta cada cierre de mes.");
+    $("plan").innerHTML = A.map(function (a) { return "<li>" + a + "</li>"; }).join("");
+
+    drawCVU(r);
+    resumen(r, V, A);
+  }
+
+  // ---------- gráfico CVU ----------
+  function drawCVU(r) {
+    var box = $("cvu");
+    var W = 480, H = 270, L = 62, R = 14, T = 12, B = 34;
+    if (!(r.uds > 0) || !isFinite(r.precioProm)) { box.innerHTML = '<p class="muted small">Registre unidades vendidas para ver el gráfico.</p>'; return; }
+    var xMax = Math.max(r.uds * 1.6, isFinite(r.peU) ? r.peU * 1.3 : 0, 10);
+    xMax = niceCeil(xMax);
+    var yMax = niceCeil(Math.max(xMax * r.precioProm, r.cf + xMax * r.cvuProm));
+    function X(u) { return L + u / xMax * (W - L - R); }
+    function Y(v) { return T + (1 - v / yMax) * (H - T - B); }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Gráfico costo volumen utilidad">';
+    for (var i = 0; i <= 4; i++) {
+      var yv = yMax * i / 4;
+      s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(yv) + '" y2="' + Y(yv) + '" stroke="var(--line)" stroke-width="1"/>';
+      s += '<text x="' + (L - 6) + '" y="' + (Y(yv) + 4) + '" text-anchor="end">' + short(yv) + '</text>';
+      var xv = xMax * i / 4;
+      s += '<text x="' + X(xv) + '" y="' + (H - B + 16) + '" text-anchor="middle">' + n(xv) + '</text>';
+    }
+    s += '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 3) + '" text-anchor="middle">Unidades vendidas al mes</text>';
+    if (r.ventas > r.cv + r.cf || isFinite(r.peU)) {
+      var pe = Math.min(r.peU, xMax);
+      s += '<polygon points="' + X(pe) + ',' + Y(r.cf + pe * r.cvuProm) + ' ' + X(xMax) + ',' + Y(xMax * r.precioProm) + ' ' + X(xMax) + ',' + Y(r.cf + xMax * r.cvuProm) + '" fill="var(--good)" fill-opacity=".12"/>';
+      s += '<polygon points="' + X(0) + ',' + Y(0) + ' ' + X(pe) + ',' + Y(pe * r.precioProm) + ' ' + X(0) + ',' + Y(r.cf) + '" fill="var(--bad)" fill-opacity=".10"/>';
+    }
+    s += '<line x1="' + X(0) + '" x2="' + X(xMax) + '" y1="' + Y(r.cf) + '" y2="' + Y(r.cf) + '" stroke="var(--s3)" stroke-width="2" stroke-dasharray="5 4"/>';
+    s += '<line x1="' + X(0) + '" x2="' + X(xMax) + '" y1="' + Y(r.cf) + '" y2="' + Y(r.cf + xMax * r.cvuProm) + '" stroke="var(--s2)" stroke-width="2"/>';
+    s += '<line x1="' + X(0) + '" x2="' + X(xMax) + '" y1="' + Y(0) + '" y2="' + Y(xMax * r.precioProm) + '" stroke="var(--s1)" stroke-width="2"/>';
+    s += '<line x1="' + X(r.uds) + '" x2="' + X(r.uds) + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3"/>';
+    s += '<text x="' + (X(r.uds) + 4) + '" y="' + (T + 10) + '" style="fill:var(--ink)">Hoy: ' + n(r.uds) + '</text>';
+    if (isFinite(r.peU) && r.peU <= xMax) {
+      s += '<circle cx="' + X(r.peU) + '" cy="' + Y(r.pePesos) + '" r="5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>';
+      var anchor = X(r.peU) > W - 120 ? "end" : "start";
+      s += '<text x="' + (X(r.peU) + (anchor === "end" ? -9 : 9)) + '" y="' + (Y(r.pePesos) + 16) + '" text-anchor="' + anchor + '" style="fill:var(--ink);font-weight:600">Equilibrio: ' + n(Math.ceil(r.peU)) + ' uds</text>';
+    }
+    s += '<line id="cvuX" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--ink)" stroke-width="1" visibility="hidden"/>';
+    s += '<rect x="' + L + '" y="' + T + '" width="' + (W - L - R) + '" height="' + (H - T - B) + '" fill="transparent" id="cvuHit"/>';
+    s += '</svg><div class="tip" id="cvuTip" hidden></div>';
+    box.innerHTML = s;
+    var svg = box.querySelector("svg"), tip = $("cvuTip"), cross = $("cvuX");
+    function move(ev) {
+      var rect = svg.getBoundingClientRect();
+      var cx = (ev.clientX - rect.left) / rect.width * W;
+      var u = Math.max(0, Math.min(xMax, (cx - L) / (W - L - R) * xMax));
+      u = Math.round(u);
+      var ing = u * r.precioProm, ct = r.cf + u * r.cvuProm, ut = ing - ct;
+      cross.setAttribute("x1", X(u)); cross.setAttribute("x2", X(u)); cross.setAttribute("visibility", "visible");
+      tip.hidden = false;
+      tip.innerHTML = '<div><b>' + n(u) + ' unidades</b></div><div><span>Ingresos</span><span class="num">' + cop(ing) + '</span></div><div><span>Costos totales</span><span class="num">' + cop(ct) + '</span></div><div><span>' + (ut < 0 ? "Pérdida" : "Utilidad") + '</span><span class="num" style="color:var(' + (ut < 0 ? "--bad" : "--good") + ')">' + cop(ut) + '</span></div>';
+      var px = (X(u) / W) * rect.width;
+      var left = px + 12; if (left + 190 > rect.width) left = px - 200;
+      tip.style.left = Math.max(0, left) + "px"; tip.style.top = "8px";
+    }
+    function leave() { tip.hidden = true; cross.setAttribute("visibility", "hidden"); }
+    var hit = $("cvuHit");
+    hit.addEventListener("pointermove", move);
+    hit.addEventListener("pointerdown", move);
+    hit.addEventListener("pointerleave", leave);
+  }
+  function niceCeil(v) {
+    if (!(v > 0)) return 1;
+    var p = Math.pow(10, Math.floor(Math.log10(v))), f = v / p;
+    var nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10;
+    return nf * p;
+  }
+  function short(v) {
+    if (v >= 1e6) return "$" + fmtN1.format(v / 1e6) + " M";
+    if (v >= 1e3) return "$" + fmtN.format(v / 1e3) + " mil";
+    return "$" + fmtN.format(v);
+  }
+
+  // ---------- resumen de texto ----------
+  function resumen(r, V, A) {
+    var t = [];
+    t.push("ANÁLISIS DE COSTOS – BELLA CRISTAL (" + (S.periodo || "periodo") + ")");
+    if (S.ejemplo) t.push("Nota: cifras de ejemplo, pendientes de reemplazar con los registros reales.");
+    t.push("");
+    t.push("Ventas: " + cop(r.ventas) + " (" + n(r.uds) + " unidades). Precio promedio: " + cop(r.precioProm) + ".");
+    t.push("Costos variables: " + cop(r.cv) + ". Margen de contribución: " + cop(r.mc) + " (" + pct(r.mcPct) + ").");
+    t.push("Costos y gastos fijos: " + cop(r.cf) + " (indirectos " + cop(r.gastoCat.cif) + ", administración " + cop(r.gastoCat.adm) + ", ventas " + cop(r.gastoCat.ven) + ", financieros " + cop(r.gastoCat.fin) + ").");
+    t.push("Utilidad operacional: " + cop(r.uo) + ". Margen de utilidad: " + pct(r.margenU) + ".");
+    t.push("Punto de equilibrio: " + (isFinite(r.peU) ? n(Math.ceil(r.peU)) + " unidades" : "no alcanzable con el margen actual") + " / " + cop(r.pePesos) + ". Margen de seguridad: " + pct(r.mSeg) + ".");
+    t.push("");
+    t.push("Margen de contribución por producto y canal:");
+    r.lineas.forEach(function (l) { t.push("- " + l.prod.nombre + " (" + l.canal.toLowerCase() + "): precio " + cop(l.precio) + ", costo variable " + cop(l.cvu) + ", MC " + cop(l.mcu) + " (" + pct(l.mcp) + "), costo total unitario " + cop(l.ctu) + "."); });
+    t.push("");
+    t.push("Contraste de la hipótesis:");
+    V.forEach(function (v) { t.push("- " + v[2] + " [" + v[1] + "]: " + v[3].replace(/<[^>]+>/g, "")); });
+    t.push("");
+    t.push("Acciones propuestas:");
+    A.forEach(function (a, i) { t.push((i + 1) + ". " + a.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&")); });
+    $("resumen").value = t.join("\n");
+  }
+
+  // ---------- respaldo ----------
+  function refreshBackup() { $("backup").value = JSON.stringify(S, null, 1); }
+  function copyFrom(id, msg) {
+    var ta = $(id);
+    var done = function () { toast(msg); };
+    var fallback = function () { ta.focus(); ta.select(); try { document.execCommand("copy"); toast(msg); } catch (e) { toast("Texto seleccionado; cópielo manualmente"); } };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(done, fallback);
+    else fallback();
+  }
+  $("copyResumen").addEventListener("click", function () { copyFrom("resumen", "Resumen copiado"); });
+  $("copyBackup").addEventListener("click", function () { refreshBackup(); copyFrom("backup", "Respaldo copiado"); });
+  $("loadBackup").addEventListener("click", function () {
+    try {
+      var d = JSON.parse($("backup").value);
+      if (!d || !Array.isArray(d.productos) || !Array.isArray(d.gastos)) throw new Error();
+      d.esc = d.esc || { p: 0, v: 0, c: 0, g: 0 }; d.mkt = d.mkt || ejemplo().mkt;
+      S = d; fullRender(); save(); toast("Respaldo cargado");
+    } catch (e) { toast("El texto pegado no es un respaldo válido de esta herramienta"); }
+  });
+  $("resetAll").addEventListener("click", function () { $("confirmReset").hidden = false; });
+  $("confirmNo").addEventListener("click", function () { $("confirmReset").hidden = true; });
+  $("confirmYes").addEventListener("click", function () { S = ejemplo(); $("confirmReset").hidden = true; fullRender(); save(); toast("Datos de ejemplo restablecidos"); });
+
+  var toastT;
+  function toast(msg) { var t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 2200); }
+
+  var raf;
+  function changed() {
+    if (S.ejemplo) S.ejemplo = false;
+    save();
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(function () { render(); });
+  }
+  function fullRender() { fillSimple(); renderProductos(); renderGastos(); render(); refreshBackup(); }
+  fullRender();
+  $("backup").addEventListener("focus", function () { if (!$("backup").value) refreshBackup(); });
+  document.querySelector('[data-tab="datos"]').addEventListener("click", refreshBackup);
+})();
+</script>
