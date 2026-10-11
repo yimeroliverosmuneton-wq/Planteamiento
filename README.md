@@ -13,6 +13,8 @@ Abra `index.html` en cualquier navegador. Los datos se pueden modificar y quedan
 - Estructura de precios y precio sugerido según margen objetivo.
 - Relación entre volumen de ventas y rentabilidad, simulador de escenarios y unidades para una meta de utilidad.
 - Indicadores de marketing digital (interacción, conversión, CAC, ROAS) ligados al margen.
+- **Catálogo**: carga un PDF de catálogo mayorista (una prenda por página), lee nombre, tallas y precio mayorista, y permite poner al lado el precio de venta con su ganancia y margen. Trae precargada la nueva colección (67 prendas).
+- **Factura de venta**: arma la factura con prendas del catálogo, datos de la clienta, descuento, envío e IVA opcional; genera la imagen de la factura, el texto para WhatsApp y un registro de ventas con ganancia bruta.
 - Contraste automático de la hipótesis y lista de acciones propuestas, más un resumen de texto para pegar en el informe.
 
 Las cifras iniciales son de ejemplo y deben reemplazarse con los registros reales.
