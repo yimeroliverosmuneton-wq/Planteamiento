@@ -2,7 +2,9 @@
 
 Herramienta web (funciona en celular y computador) que aplica el modelo costo-volumen-utilidad al emprendimiento Bella Cristal, como solución del planteamiento del problema del proyecto de Práctica Profesional I (Contaduría Pública, Uniminuto).
 
-Abra `index.html` en cualquier navegador. Los datos se pueden modificar y quedan guardados en ese dispositivo.
+Página publicada: https://yimeroliverosmuneton-wq.github.io/Planteamiento/
+
+Cada persona crea su cuenta e inicia sesión; la información queda guardada en su cuenta. Para guardar las cuentas en la nube y entrar desde cualquier dispositivo, siga [FIREBASE.md](FIREBASE.md).
 
 ## Qué calcula
 - Costo unitario de cada pijama (costos directos) y costo total unitario (con los costos y gastos fijos asignados).

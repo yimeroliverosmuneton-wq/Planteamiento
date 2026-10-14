@@ -203,19 +203,68 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
 .inv-img { width: 100%; max-width: 640px; display: block; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 .check { display: flex; gap: 8px; align-items: center; font-size: .88rem; }
 .check input { width: auto; }
+
+/* Acceso */
+.auth { min-height: 100%; display: flex; align-items: flex-start; justify-content: center; padding-inline: 16px; padding-block: 8vh 32px; }
+.auth-card { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 14px; }
+.auth-card h1 { font-size: 2.4rem; color: var(--accent); }
+.auth-tabs { display: grid; grid-template-columns: 1fr 1fr; background: var(--sunk); border-radius: 10px; padding: 4px; gap: 4px; }
+.auth-tabs button { border: 0; background: none; color: var(--muted); font: 600 .9rem var(--f-body); padding: 9px; border-radius: 7px; cursor: pointer; }
+.auth-tabs button[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgb(0 0 0 / .12); }
+.auth-form { display: flex; flex-direction: column; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; }
+.auth-form .btn { padding-block: 11px; }
+.btn:disabled { opacity: .6; cursor: progress; }
+.linkbtn { border: 0; background: none; color: var(--accent); font: 500 .85rem var(--f-body); cursor: pointer; padding: 4px; align-self: center; }
+.auth-msg { background: var(--bad-soft); color: var(--bad); border-radius: 8px; padding: 10px 12px; font-size: .88rem; }
+.auth-msg.ok { background: var(--good-soft); color: var(--good); }
+.auth-mode { color: var(--muted); }
+.top-side { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; min-width: 0; }
+.who { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; font-size: .88rem; }
+.who-name { font-weight: 600; overflow-wrap: anywhere; }
+@media (max-width: 560px) { .top-side { align-items: stretch; width: 100%; } .who { justify-content: flex-start; } }
 @media (prefers-reduced-motion: no-preference) { .bar { transition: width .3s ease; } }
 </style>
 
-<div class="wrap">
+<section class="auth" id="auth" aria-labelledby="authTitle">
+  <div class="auth-card">
+    <p class="eyebrow">Contaduría Pública · Análisis de costos</p>
+    <h1 id="authTitle">Bella Cristal</h1>
+    <p class="muted small">Costos, catálogo y facturas del emprendimiento. Inicie sesión para ver y guardar su información.</p>
+    <div class="auth-tabs" role="tablist" aria-label="Acceso">
+      <button type="button" role="tab" id="tabLogin" aria-selected="true">Iniciar sesión</button>
+      <button type="button" role="tab" id="tabSignup" aria-selected="false">Crear cuenta</button>
+    </div>
+    <form id="formLogin" class="auth-form" novalidate>
+      <label class="f">Correo electrónico<input id="loginEmail" type="email" autocomplete="username" required></label>
+      <label class="f">Contraseña<input id="loginPass" type="password" autocomplete="current-password" required></label>
+      <button class="btn" type="submit" id="loginBtn">Entrar</button>
+      <button class="linkbtn" type="button" id="forgotBtn">Olvidé mi contraseña</button>
+    </form>
+    <form id="formSignup" class="auth-form" novalidate hidden>
+      <label class="f">Nombre<input id="suName" type="text" autocomplete="name" required></label>
+      <label class="f">Correo electrónico<input id="suEmail" type="email" autocomplete="username" required></label>
+      <label class="f">Contraseña (mínimo 6 caracteres)<input id="suPass" type="password" autocomplete="new-password" minlength="6" required></label>
+      <label class="f">Repita la contraseña<input id="suPass2" type="password" autocomplete="new-password" required></label>
+      <button class="btn" type="submit" id="signupBtn">Crear cuenta</button>
+    </form>
+    <p class="auth-msg" id="authMsg" role="alert" hidden></p>
+    <p class="auth-mode small" id="authMode">Preparando…</p>
+  </div>
+</section>
+
+<div class="wrap" id="app" hidden>
   <header class="top">
     <div>
       <p class="eyebrow">Contaduría Pública · Análisis de costos</p>
       <h1>Bella Cristal</h1>
       <p class="sub">Costos, margen de contribución y punto de equilibrio de las pijamas</p>
     </div>
-    <label class="f period">Periodo analizado
-      <input id="periodo" type="text">
-    </label>
+    <div class="top-side">
+      <div class="who"><span class="who-name" id="whoName"></span><span class="pill good" id="syncState">Listo</span><button class="btn quiet" type="button" id="logoutBtn">Cerrar sesión</button></div>
+      <label class="f period">Periodo analizado
+        <input id="periodo" type="text">
+      </label>
+    </div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Secciones">
@@ -535,17 +584,15 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
     };
   }
 
-  var S;
-  try { S = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { S = null; }
-  if (!S || !Array.isArray(S.productos)) S = ejemplo();
-  S.esc = S.esc || { p: 0, v: 0, c: 0, g: 0 };
-  S.mkt = S.mkt || ejemplo().mkt;
+  // S se carga al iniciar sesión (ver BCBoot); STORE guarda en la cuenta activa.
+  var S = ejemplo();
+  var STORE = null;
 
   var saveTimer;
   function save() {
     clearTimeout(saveTimer);
     saveTimer = setTimeout(function () {
-      try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+      if (STORE) STORE.save(S);
     }, 250);
   }
 
@@ -1007,9 +1054,9 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
   function loadThumbs() {
     thumbs = {};
     if (S.catalogo && S.catalogo.seed && SEED) { Object.keys(SEED.thumbs).forEach(function (k) { thumbs["c" + k] = SEED.thumbs[k]; }); return; }
-    try { thumbs = JSON.parse(localStorage.getItem(KEY + ".thumbs") || "{}"); } catch (e) { thumbs = {}; }
+    thumbs = (STORE && STORE.loadThumbs()) || {};
   }
-  function saveThumbs() { try { localStorage.setItem(KEY + ".thumbs", JSON.stringify(thumbs)); } catch (e) {} }
+  function saveThumbs() { if (STORE) STORE.saveThumbs(thumbs); }
 
   function tallasDe(t) {
     t = String(t || "").trim(); if (!t) return ["Única"];
@@ -1429,7 +1476,7 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
   });
   function softSave() { save(); }
   function renderExtra() { loadThumbs(); fillFacturaForm(); renderCatalogo(); renderFactura(); renderHist(); }
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawInvoiceSoon);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (STORE) drawInvoiceSoon(); });
 
   var raf;
   function changed() {
@@ -1439,8 +1486,255 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
     raf = requestAnimationFrame(function () { render(); });
   }
   function fullRender() { defaultsExtra(); fillSimple(); renderProductos(); renderGastos(); render(); renderExtra(); refreshBackup(); }
-  fullRender();
+  window.BCBoot = function (data, store) {
+    STORE = store;
+    S = data && Array.isArray(data.productos) && Array.isArray(data.gastos) ? data : ejemplo();
+    var base = ejemplo();
+    ["periodo", "comision", "objDetal", "objMayor", "meta", "esc", "mkt"].forEach(function (k) { if (S[k] == null) S[k] = base[k]; });
+    fullRender();
+    save();
+  };
   $("backup").addEventListener("focus", function () { if (!$("backup").value) refreshBackup(); });
   document.querySelector('[data-tab="datos"]').addEventListener("click", refreshBackup);
 })();
 </script>
+<script>
+/* =========================================================
+   CUENTAS DE USUARIO
+   Para guardar las cuentas y los datos en la nube (entrar desde
+   cualquier celular o computador), pegue aquí la configuración de
+   su proyecto de Firebase. Si se deja en null, las cuentas y sus
+   datos se guardan solo en el navegador donde se crean.
+   ========================================================= */
+var FIREBASE_CONFIG = null;
+
+(function () {
+  "use strict";
+  var KEY = "bellaCristal.costos.v1";
+  var FB = "https://cdn.jsdelivr.net/npm/firebase@10.12.2/";
+  function $(id) { return document.getElementById(id); }
+  function ls(k, v) {
+    try {
+      if (v === undefined) return localStorage.getItem(k);
+      if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v);
+    } catch (e) { return null; }
+  }
+  function lsJSON(k) { try { return JSON.parse(ls(k) || "null"); } catch (e) { return null; } }
+
+  var mode = "local", auth = null, fdb = null;
+
+  // ---------- interfaz ----------
+  function msg(text, ok) { var m = $("authMsg"); m.textContent = text; m.hidden = !text; m.className = "auth-msg" + (ok ? " ok" : ""); }
+  function tab(which) {
+    var login = which === "login";
+    $("tabLogin").setAttribute("aria-selected", login); $("tabSignup").setAttribute("aria-selected", !login);
+    $("formLogin").hidden = !login; $("formSignup").hidden = login; msg("");
+    $(login ? "loginEmail" : "suName").focus();
+  }
+  $("tabLogin").addEventListener("click", function () { tab("login"); });
+  $("tabSignup").addEventListener("click", function () { tab("signup"); });
+  function busy(btn, on, label) { btn.disabled = on; if (on) { btn.dataset.l = btn.textContent; btn.textContent = label; } else if (btn.dataset.l) btn.textContent = btn.dataset.l; }
+  function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+  function sync(text, cls) { var s = $("syncState"); if (s) { s.textContent = text; s.className = "pill " + (cls || "good"); } }
+
+  function enterApp(nombre, email, data, store) {
+    $("auth").hidden = true; $("app").hidden = false;
+    $("whoName").textContent = nombre || email;
+    $("whoName").title = email;
+    window.BCBoot(data, store);
+    window.scrollTo(0, 0);
+  }
+
+  // Datos guardados antes de que existieran las cuentas: se entregan a la primera cuenta.
+  function datosPrevios() {
+    if (ls(KEY + ".migrado")) return null;
+    var d = lsJSON(KEY);
+    if (!d || !Array.isArray(d.productos)) return null;
+    ls(KEY + ".migrado", "1");
+    return { estado: d, thumbs: lsJSON(KEY + ".thumbs") };
+  }
+
+  // ---------- modo local (este dispositivo) ----------
+  function userKey(email) { return KEY + ".u." + email.toLowerCase(); }
+  function usuarios() { return lsJSON(KEY + ".usuarios") || {}; }
+  function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return b.toString(16).padStart(2, "0"); }).join(""); }
+  async function hashPass(pass, sal) {
+    if (window.crypto && crypto.subtle) {
+      var k = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveBits"]);
+      var bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: new TextEncoder().encode(sal), iterations: 120000, hash: "SHA-256" }, k, 256);
+      return "pbkdf2:" + hex(bits);
+    }
+    var h = 2166136261, str = sal + "|" + pass;
+    for (var r = 0; r < 5000; r++) for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return "fnv:" + h.toString(16);
+  }
+  function localStore(email) {
+    var k = userKey(email);
+    return {
+      save: function (S) {
+        try { localStorage.setItem(k, JSON.stringify(S)); sync("Guardado en este dispositivo", "good"); }
+        catch (e) { sync("No se pudo guardar: memoria llena", "bad"); }
+      },
+      loadThumbs: function () { return lsJSON(k + ".thumbs") || {}; },
+      saveThumbs: function (t) { ls(k + ".thumbs", JSON.stringify(t)); },
+      logout: function () { ls(KEY + ".sesion", null); return Promise.resolve(); }
+    };
+  }
+  function abrirLocal(email) {
+    var u = usuarios()[email.toLowerCase()];
+    if (!u) return false;
+    ls(KEY + ".sesion", email.toLowerCase());
+    enterApp(u.nombre, email, lsJSON(userKey(email)), localStore(email));
+    return true;
+  }
+  async function loginLocal(email, pass) {
+    var u = usuarios()[email.toLowerCase()];
+    if (!u) throw new Error("No hay una cuenta con ese correo en este dispositivo. Use Crear cuenta.");
+    if (await hashPass(pass, u.sal) !== u.hash) throw new Error("La contraseña no es correcta.");
+    abrirLocal(email);
+  }
+  async function signupLocal(nombre, email, pass) {
+    var all = usuarios(), id = email.toLowerCase();
+    if (all[id]) throw new Error("Ya existe una cuenta con ese correo en este dispositivo. Inicie sesión.");
+    var sal = hex(crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(16)) : new Uint8Array(16).map(function () { return Math.random() * 256; }));
+    all[id] = { nombre: nombre, sal: sal, hash: await hashPass(pass, sal), creado: new Date().toISOString() };
+    ls(KEY + ".usuarios", JSON.stringify(all));
+    if (!ls(KEY + ".usuarios")) throw new Error("Este navegador no permite guardar datos (¿modo incógnito?). Abra la página en una ventana normal.");
+    var prev = datosPrevios();
+    if (prev) { ls(userKey(id), JSON.stringify(prev.estado)); if (prev.thumbs) ls(userKey(id) + ".thumbs", JSON.stringify(prev.thumbs)); }
+    abrirLocal(email);
+  }
+
+  // ---------- modo nube (Firebase) ----------
+  var ERR = {
+    "auth/invalid-email": "El correo no tiene un formato válido.",
+    "auth/user-not-found": "No hay una cuenta con ese correo. Use Crear cuenta.",
+    "auth/wrong-password": "La contraseña no es correcta.",
+    "auth/invalid-credential": "Correo o contraseña incorrectos.",
+    "auth/invalid-login-credentials": "Correo o contraseña incorrectos.",
+    "auth/email-already-in-use": "Ya existe una cuenta con ese correo. Inicie sesión.",
+    "auth/weak-password": "La contraseña debe tener al menos 6 caracteres.",
+    "auth/too-many-requests": "Demasiados intentos. Espere unos minutos y vuelva a intentar.",
+    "auth/network-request-failed": "Sin conexión a internet. Revise la red y vuelva a intentar."
+  };
+  function fbErr(e) { return new Error(ERR[e && e.code] || (e && e.message) || "No se pudo completar la operación."); }
+  function cloudStore(uid) {
+    var ref = fdb.collection("usuarios").doc(uid), timer = null, pending = null, thumbs = {};
+    function flush() {
+      if (!pending) return Promise.resolve();
+      var data = pending; pending = null; clearTimeout(timer);
+      sync("Guardando…", "warn");
+      return ref.set({ estado: data, actualizado: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true })
+        .then(function () { sync("Guardado en la nube", "good"); })
+        .catch(function (e) { pending = pending || data; sync("Sin guardar: " + (ERR[e.code] || "revise la conexión"), "bad"); });
+    }
+    document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") flush(); });
+    window.addEventListener("online", flush);
+    return {
+      save: function (S) { pending = JSON.stringify(S); sync("Cambios sin guardar…", "warn"); clearTimeout(timer); timer = setTimeout(flush, 1200); },
+      setThumbs: function (t) { thumbs = t || {}; },
+      loadThumbs: function () { return thumbs; },
+      saveThumbs: function (t) {
+        thumbs = t;
+        ref.collection("extra").doc("miniaturas").set({ data: JSON.stringify(t) }).catch(function () { sync("Miniaturas sin guardar en la nube", "warn"); });
+      },
+      logout: function () { return flush().then(function () { return auth.signOut(); }); }
+    };
+  }
+  var opening = false, signingUp = false;
+  async function abrirNube(user) {
+    if (opening) return;
+    opening = true;
+    $("authMode").textContent = "Cargando sus datos…";
+    var ref = fdb.collection("usuarios").doc(user.uid);
+    var snap = await ref.get(), data = null, store = cloudStore(user.uid);
+    if (snap.exists && snap.data().estado) {
+      try { data = JSON.parse(snap.data().estado); } catch (e) { data = null; }
+      var t = await ref.collection("extra").doc("miniaturas").get().catch(function () { return null; });
+      if (t && t.exists) { try { store.setThumbs(JSON.parse(t.data().data)); } catch (e) {} }
+    } else {
+      var prev = datosPrevios();
+      if (prev) { data = prev.estado; store.setThumbs(prev.thumbs); if (prev.thumbs) store.saveThumbs(prev.thumbs); }
+      await ref.set({ nombre: user.displayName || "", correo: user.email, creado: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+    }
+    enterApp(user.displayName, user.email, data, store);
+  }
+
+  // ---------- formularios ----------
+  var STORE_ACTIVE = null;
+  $("formLogin").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var email = $("loginEmail").value.trim(), pass = $("loginPass").value, b = $("loginBtn");
+    if (!validEmail(email)) return msg("Escriba un correo válido, por ejemplo nombre@gmail.com.");
+    if (!pass) return msg("Escriba su contraseña.");
+    busy(b, true, "Entrando…"); msg("");
+    try {
+      if (mode === "cloud") await auth.signInWithEmailAndPassword(email, pass).catch(function (er) { throw fbErr(er); });
+      else await loginLocal(email, pass);
+    } catch (er) { msg(er.message); }
+    busy(b, false);
+  });
+  $("formSignup").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var nombre = $("suName").value.trim(), email = $("suEmail").value.trim(), p1 = $("suPass").value, p2 = $("suPass2").value, b = $("signupBtn");
+    if (!nombre) return msg("Escriba su nombre.");
+    if (!validEmail(email)) return msg("Escriba un correo válido, por ejemplo nombre@gmail.com.");
+    if (p1.length < 6) return msg("La contraseña debe tener al menos 6 caracteres.");
+    if (p1 !== p2) return msg("Las dos contraseñas no coinciden.");
+    busy(b, true, "Creando cuenta…"); msg("");
+    try {
+      if (mode === "cloud") {
+        signingUp = true;
+        try {
+          var cred = await auth.createUserWithEmailAndPassword(email, p1).catch(function (er) { throw fbErr(er); });
+          await cred.user.updateProfile({ displayName: nombre });
+          await abrirNube(auth.currentUser);
+        } finally { signingUp = false; }
+      } else await signupLocal(nombre, email, p1);
+    } catch (er) { msg(er.message); }
+    busy(b, false);
+  });
+  $("forgotBtn").addEventListener("click", async function () {
+    var email = $("loginEmail").value.trim();
+    if (mode !== "cloud") return msg("En el modo de este dispositivo la contraseña no se puede recuperar. Si la olvidó, cree una cuenta nueva y cargue un respaldo de sus datos.");
+    if (!validEmail(email)) return msg("Escriba arriba su correo y vuelva a tocar «Olvidé mi contraseña».");
+    try { await auth.sendPasswordResetEmail(email); msg("Le enviamos un correo a " + email + " para cambiar la contraseña.", true); }
+    catch (er) { msg(fbErr(er).message); }
+  });
+  $("logoutBtn").addEventListener("click", function () {
+    var b = $("logoutBtn"); busy(b, true, "Cerrando…");
+    var st = STORE_CURRENT();
+    (st ? st.logout() : Promise.resolve()).then(function () { location.reload(); }, function () { location.reload(); });
+  });
+  function STORE_CURRENT() { return STORE_ACTIVE; }
+  var _boot = window.BCBoot;
+  window.BCBoot = function (data, store) { STORE_ACTIVE = store; _boot(data, store); };
+
+  // ---------- arranque ----------
+  function loadScript(src) {
+    return new Promise(function (ok, fail) { var s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = fail; document.head.appendChild(s); });
+  }
+  function startLocal(nota) {
+    mode = "local";
+    $("authMode").innerHTML = (nota ? nota + " " : "") + "Las cuentas y los datos se guardan <b>en este navegador</b>. Para pasar sus datos a otro celular use «Copiar respaldo» en la pestaña Datos.";
+    var ses = ls(KEY + ".sesion");
+    if (ses && usuarios()[ses]) abrirLocal(ses);
+  }
+  function startCloud() {
+    return loadScript(FB + "firebase-app-compat.js")
+      .then(function () { return Promise.all([loadScript(FB + "firebase-auth-compat.js"), loadScript(FB + "firebase-firestore-compat.js")]); })
+      .then(function () {
+        firebase.initializeApp(FIREBASE_CONFIG);
+        auth = firebase.auth(); fdb = firebase.firestore();
+        mode = "cloud";
+        $("authMode").innerHTML = "Sus datos se guardan <b>en la nube</b>: puede entrar desde cualquier celular o computador.";
+        auth.onAuthStateChanged(function (user) {
+          if (user && !signingUp) abrirNube(user).catch(function (e) { opening = false; msg("No se pudieron cargar sus datos: " + fbErr(e).message); });
+        });
+      });
+  }
+  if (FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey) startCloud().catch(function () { startLocal("No se pudo conectar con la nube."); });
+  else startLocal("");
+})();
+</script>
+
