@@ -76,4 +76,4 @@ Al abrir la página, debajo del formulario dirá «Sus datos se guardan en la nu
 
 ## Tienda para clientas
 
-La página `tienda.html` (https://yimeroliverosmuneton-wq.github.io/Planteamiento/tienda.html) es pública y no pide cuenta. Muestra las prendas que se publican desde la pestaña **Tienda** de la administración. La primera cuenta que toque **Publicar catálogo en la tienda** queda como dueña: solo esa cuenta puede volver a publicar y ver los pedidos.
+La página `tienda.html` (https://yimeroliverosmuneton-wq.github.io/bellacristalshop/tienda.html) es pública y no pide cuenta. Muestra las prendas que se publican desde la pestaña **Tienda** de la administración. La primera cuenta que toque **Publicar catálogo en la tienda** queda como dueña: solo esa cuenta puede volver a publicar y ver los pedidos.

@@ -310,7 +310,7 @@ a.btn { text-decoration: none; display: inline-block; }
       </div>
     </div>
     <div class="top-side">
-      <div class="who"><span class="who-name" id="whoName"></span><span class="pill good" id="syncState">Listo</span><a class="btn ghost" href="https://yimeroliverosmuneton-wq.github.io/Planteamiento/tienda.html" target="_blank" rel="noopener" id="verTienda">Ver tienda</a><button class="btn quiet" type="button" id="logoutBtn">Cerrar sesión</button></div>
+      <div class="who"><span class="who-name" id="whoName"></span><span class="pill good" id="syncState">Listo</span><a class="btn ghost" href="https://yimeroliverosmuneton-wq.github.io/bellacristalshop/tienda.html" target="_blank" rel="noopener" id="verTienda">Ver tienda</a><button class="btn quiet" type="button" id="logoutBtn">Cerrar sesión</button></div>
       <label class="f period">Periodo analizado
         <input id="periodo" type="text">
       </label>
@@ -459,7 +459,7 @@ a.btn { text-decoration: none; display: inline-block; }
       <h2>Tienda en línea</h2>
       <p class="lead small">Página pública para las clientas: sin inicio de sesión, ven el catálogo con precios al detal, promociones y descripción, y arman su carrito. Salen las prendas del Catálogo que tienen precio de venta y no están ocultas. Las descripciones y promociones se escriben en Catálogo, en «Editar».</p>
     </div>
-    <div class="example-note" id="tiendaNube" hidden><span><b>Necesita la nube.</b> La tienda y los pedidos funcionan en la página de GitHub con su cuenta iniciada (yimeroliverosmuneton-wq.github.io/Planteamiento).</span></div>
+    <div class="example-note" id="tiendaNube" hidden><span><b>Necesita la nube.</b> La tienda y los pedidos funcionan en la página de GitHub con su cuenta iniciada (yimeroliverosmuneton-wq.github.io/bellacristalshop).</span></div>
     <div class="card block">
       <div class="row" style="justify-content:space-between">
         <div style="min-width:0"><div class="eyebrow">Enlace para las clientas</div><a id="tiendaLink" class="store-url" target="_blank" rel="noopener"><span id="tiendaUrl"></span></a></div>
@@ -1597,7 +1597,9 @@ a.btn { text-decoration: none; display: inline-block; }
   // =========================================================
   // TIENDA EN LÍNEA (publicación) Y PEDIDOS DE CLIENTAS
   // =========================================================
-  var TIENDA_URL = "https://yimeroliverosmuneton-wq.github.io/Planteamiento/tienda.html";
+  // En GitHub Pages se usa la dirección real del sitio; en otras vistas, la dirección publicada.
+  var SITIO = /github\.io$/.test(location.hostname) ? location.origin + location.pathname.replace(/[^/]*$/, "") : "https://yimeroliverosmuneton-wq.github.io/bellacristalshop/";
+  var TIENDA_URL = SITIO + "tienda.html";
   var fotosGrandes = {};
   var pedidos = [], pedUnsub = null;
   function cloud() { return window.BCCloud || null; }
@@ -1729,7 +1731,7 @@ a.btn { text-decoration: none; display: inline-block; }
   });
 
   // ---------- WhatsApp con foto ----------
-  var BASE_URL = "https://yimeroliverosmuneton-wq.github.io/Planteamiento/";
+  var BASE_URL = SITIO;
   function enlacePrenda(id) { return /^c\d+$/.test(id) ? BASE_URL + "p/" + id + ".html" : BASE_URL + "tienda.html#" + id; }
   function textoPedido(p) {
     var L = ["Hola " + (p.nombre || "") + ", te escribimos de " + (S.vendedor.nombre || "Bella Cristal") + ". Recibimos tu pedido:"];
@@ -2087,7 +2089,7 @@ var FIREBASE_CONFIG = {
   var enMarco = false;
   try { enMarco = window.self !== window.top; } catch (e) { enMarco = true; }
   if (FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey && !enMarco) startCloud().catch(function () { startLocal("No se pudo conectar con la nube."); });
-  else startLocal(enMarco && FIREBASE_CONFIG ? "Para guardar en la nube abra la página yimeroliverosmuneton-wq.github.io/Planteamiento." : "");
+  else startLocal(enMarco && FIREBASE_CONFIG ? "Para guardar en la nube abra la página yimeroliverosmuneton-wq.github.io/bellacristalshop." : "");
 })();
 </script>
 

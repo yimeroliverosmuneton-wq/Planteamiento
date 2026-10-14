@@ -2,9 +2,9 @@
 
 Herramienta web (funciona en celular y computador) que aplica el modelo costo-volumen-utilidad al emprendimiento Bella Cristal, como solución del planteamiento del problema del proyecto de Práctica Profesional I (Contaduría Pública, Uniminuto).
 
-Página publicada: https://yimeroliverosmuneton-wq.github.io/Planteamiento/
+Página publicada: https://yimeroliverosmuneton-wq.github.io/bellacristalshop/
 
-Tienda para clientas (sin cuenta): https://yimeroliverosmuneton-wq.github.io/Planteamiento/tienda.html
+Tienda para clientas (sin cuenta): https://yimeroliverosmuneton-wq.github.io/bellacristalshop/tienda.html
 
 Cada persona crea su cuenta e inicia sesión; la información queda guardada en su cuenta. Para guardar las cuentas en la nube y entrar desde cualquier dispositivo, siga [FIREBASE.md](FIREBASE.md).
 
