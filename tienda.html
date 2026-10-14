@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bella Cristal Tienda</title>
+<meta name="description" content="Catálogo de pijamas Bella Cristal con precios, promociones y pedidos por WhatsApp. Envíos a toda Colombia.">
+<meta name="theme-color" content="#c42a84">
+<meta property="og:title" content="Bella Cristal · Tienda de pijamas">
+<meta property="og:description" content="Mira el catálogo y arma tu pedido por WhatsApp.">
+<meta property="og:image" content="https://yimeroliverosmuneton-wq.github.io/Planteamiento/assets/portada.webp">
+<link rel="icon" type="image/png" href="assets/icono.png">
+<link rel="apple-touch-icon" href="assets/icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Figtree:wght@400;500;600;700&family=Fredoka:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Tienda pública: portada como banner, buscador y categorías pegajosos, grilla de prendas a dos columnas en el celular, hojas inferiores para detalle, datos y carrito. Mismos tokens de marca que la administración. */
+:root {
+  --bg: #fbf4fa;
+  --surface: #ffffff;
+  --sunk: #f5e7f3;
+  --ink: #2a1830;
+  --muted: #7a6380;
+  --line: #eed9ec;
+  --accent: #c42a84;
+  --accent-ink: #ffffff;
+  --accent-soft: #fce1f1;
+  --lilac: #9d6fd6;
+  --glow1: rgb(255 122 207 / .20);
+  --glow2: rgb(176 132 238 / .18);
+  --glass: rgb(255 255 255 / .74);
+  --glass-line: rgb(255 255 255 / .9);
+  --veil-top: rgb(251 244 250 / .15);
+  --veil-bottom: rgb(251 244 250 / .92);
+  --good: #1d7f54;
+  --good-soft: #e1f2e9;
+  --warn: #9a6512;
+  --warn-soft: #f8ecd6;
+  --bad: #b83636;
+  --bad-soft: #f9e2e2;
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --f-display: "Fredoka", "Baloo 2", system-ui, sans-serif;
+  --f-caps: "Cinzel", "Trajan Pro", Georgia, serif;
+  --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-num: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1a1020; --surface: #251729; --sunk: #321f37; --ink: #f8eaf6; --muted: #c0a6c5;
+    --line: #402a46; --accent: #ff7cc8; --accent-ink: #2a0b1f; --accent-soft: #42213a; --lilac: #c4a2f2;
+    --glow1: rgb(255 92 190 / .14); --glow2: rgb(150 100 230 / .14);
+    --glass: rgb(37 23 41 / .78); --glass-line: rgb(255 255 255 / .12);
+    --veil-top: rgb(26 16 32 / .35); --veil-bottom: rgb(26 16 32 / .95);
+    --good: #55c58f; --good-soft: #17342a; --warn: #e3a64b; --warn-soft: #3a2c15;
+    --bad: #f07a7a; --bad-soft: #3d1d1f; --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1a1020; --surface: #251729; --sunk: #321f37; --ink: #f8eaf6; --muted: #c0a6c5;
+  --line: #402a46; --accent: #ff7cc8; --accent-ink: #2a0b1f; --accent-soft: #42213a; --lilac: #c4a2f2;
+  --glow1: rgb(255 92 190 / .14); --glow2: rgb(150 100 230 / .14);
+  --glass: rgb(37 23 41 / .78); --glass-line: rgb(255 255 255 / .12);
+  --veil-top: rgb(26 16 32 / .35); --veil-bottom: rgb(26 16 32 / .95);
+  --good: #55c58f; --good-soft: #17342a; --warn: #e3a64b; --warn-soft: #3a2c15;
+  --bad: #f07a7a; --bad-soft: #3d1d1f; --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--ink); font: 15px/1.5 var(--f-body); background-color: var(--bg); background-image: radial-gradient(60rem 30rem at 100% 0%, var(--glow1), transparent 70%), radial-gradient(50rem 30rem at 0% 40%, var(--glow2), transparent 70%); background-attachment: fixed; }
+body.lock { overflow: hidden; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 600; margin: 0; line-height: 1.15; text-wrap: balance; }
+p { margin: 0; }
+.num { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: .84rem; }
+.tagline { font-family: var(--f-caps); font-weight: 700; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 0 110px; position: relative; z-index: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible, .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Portada */
+header.hero { position: relative; margin-inline: -16px; padding-inline: 16px; padding-block: 150px 8px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+.hero-img { position: absolute; inset: 0 0 auto 0; height: 230px; background: url(assets/portada.webp) center 15% / cover no-repeat; z-index: -1; }
+.hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(0 0 0 / 0) 30%, var(--bg) 100%); }
+.hero .logo { width: 116px; height: 116px; border-radius: 50%; filter: drop-shadow(0 8px 22px rgb(255 79 184 / .5)); }
+.hero h1 { font-size: 2.3rem; color: var(--accent); }
+.hero .msg { color: var(--muted); max-width: 42ch; }
+
+/* Búsqueda y filtros */
+.tools { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); margin-inline: -16px; padding: 10px 16px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid var(--line); }
+.search { width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 11px 18px; font-size: 1rem; }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 14px; font: 600 .88rem var(--f-display); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+/* Grilla de productos */
+.status { padding: 40px 8px; text-align: center; color: var(--muted); }
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(46%, 220px), 1fr)); padding-top: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; text-align: left; padding: 0; min-width: 0; transition: transform .15s ease, box-shadow .15s ease; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgb(196 42 132 / .16); }
+.ph { position: relative; aspect-ratio: 62 / 92; background: var(--sunk); max-width: 100%; }
+.ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph .tag { position: absolute; left: 8px; top: 8px; background: var(--accent); color: var(--accent-ink); font: 700 .7rem var(--f-body); letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; }
+.card .body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px; }
+.card .name { font-family: var(--f-display); font-weight: 600; font-size: 1rem; line-height: 1.2; }
+.price { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; }
+.price b { font-family: var(--f-num); font-size: 1rem; color: var(--accent); }
+.price s { font-family: var(--f-num); font-size: .82rem; color: var(--muted); }
+.card .sizes { font-size: .78rem; color: var(--muted); }
+.promo-text { font-size: .78rem; font-weight: 600; color: var(--lilac); }
+
+/* Botones */
+.btn { font: 600 1rem var(--f-display); border-radius: 999px; padding: 12px 18px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); cursor: pointer; text-align: center; text-decoration: none; display: inline-block; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn.block { width: 100%; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.icon-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; line-height: 1; }
+
+/* Hojas (detalle, datos, carrito) */
+.overlay { position: fixed; inset: 0; z-index: 20; background: rgb(30 10 30 / .45); display: flex; align-items: flex-end; justify-content: center; }
+.sheet { background: var(--surface); width: 100%; max-width: 560px; max-height: 92vh; max-height: 92dvh; overflow-y: auto; border-radius: 24px 24px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 14px; }
+@media (min-width: 700px) { .overlay { align-items: center; } .sheet { border-radius: 24px; } }
+.sheet-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.detail { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 520px) { .detail { grid-template-columns: 200px minmax(0, 1fr); } }
+.detail .ph { border-radius: 14px; overflow: hidden; }
+.desc { white-space: pre-line; color: var(--ink); font-size: .95rem; }
+.label { font-size: .8rem; font-weight: 600; color: var(--muted); }
+.sizes-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+.sizes-pick button { min-width: 48px; border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 8px 12px; font-weight: 600; cursor: pointer; }
+.sizes-pick button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.qty { display: inline-flex; align-items: center; gap: 10px; }
+.qty span { min-width: 2ch; text-align: center; font-family: var(--f-num); font-weight: 500; }
+label.f { display: flex; flex-direction: column; gap: 4px; font-size: .82rem; color: var(--muted); font-weight: 500; }
+label.f input, label.f textarea { border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 10px 12px; font-size: 1rem; color: var(--ink); }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: .82rem; color: var(--muted); }
+.check input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--accent); flex: none; }
+.err { background: var(--bad-soft); color: var(--bad); border-radius: 10px; padding: 9px 12px; font-size: .88rem; }
+.cart-line { display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding-block: 8px; border-bottom: 1px solid var(--line); }
+.cart-line img, .cart-line .noimg { width: 54px; aspect-ratio: 62 / 92; object-fit: cover; border-radius: 8px; background: var(--sunk); display: block; }
+.cart-line .name { font-weight: 600; font-size: .92rem; }
+.cart-line .meta { font-size: .8rem; color: var(--muted); }
+.cart-total { display: flex; justify-content: space-between; align-items: baseline; font-size: 1.1rem; }
+.cart-total b { font-family: var(--f-num); color: var(--accent); }
+.who { background: var(--sunk); border-radius: 12px; padding: 10px 12px; font-size: .88rem; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+.linkbtn { border: 0; background: none; color: var(--accent); font-weight: 600; cursor: pointer; padding: 4px; }
+
+/* Botón del carrito */
+.fab { position: fixed; z-index: 10; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgb(196 42 132 / .35); padding: 13px 22px; }
+.fab .count { background: var(--accent-ink); color: var(--accent); border-radius: 999px; min-width: 1.6em; padding: 0 6px; font: 700 .85rem/1.6em var(--f-body); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(84px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; z-index: 30; font-size: .9rem; max-width: calc(100% - 32px); text-align: center; }
+footer { text-align: center; color: var(--muted); font-size: .8rem; padding-top: 40px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+footer a { color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-img" aria-hidden="true"></div>
+    <img class="logo" src="assets/logo.webp" alt="Logo de Bella Cristal">
+    <p class="tagline">Tienda de pijamas</p>
+    <h1 id="storeName">Bella Cristal</h1>
+    <p class="msg" id="storeMsg">Pijamas cómodas y hermosas con envío a toda Colombia.</p>
+  </header>
+
+  <div class="tools">
+    <input class="search" id="q" type="search" placeholder="Buscar: bata, satín, conjunto…" aria-label="Buscar pijamas">
+    <div class="chips" id="chips" role="toolbar" aria-label="Categorías"></div>
+  </div>
+
+  <p class="status" id="status">Cargando el catálogo…</p>
+  <main class="grid" id="grid" aria-live="polite"></main>
+
+  <footer>
+    <p><b>Bella Cristal</b> · Ibagué, Tolima · Envíos a toda Colombia</p>
+    <p>Tus datos se usan solo para atender tu pedido (Ley 1581 de 2012). Tienes derecho de retracto en compras a distancia (Ley 1480 de 2011).</p>
+    <a href="index.html">Administración</a>
+  </footer>
+</div>
+
+<button class="btn fab" id="fab" type="button" hidden><span>Ver carrito</span><span class="count" id="fabCount">0</span><span class="num" id="fabTotal"></span></button>
+
+<!-- Detalle de la prenda -->
+<div class="overlay" id="ovDetail" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dName">
+    <div class="sheet-head"><h2 id="dName"></h2><button class="icon-btn" type="button" data-close aria-label="Cerrar">✕</button></div>
+    <div class="detail">
+      <div class="ph" id="dPh"></div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <div class="price" id="dPrice"></div>
+        <p class="promo-text" id="dPromo"></p>
+        <p class="desc" id="dDesc"></p>
+        <div><p class="label">Talla</p><div class="sizes-pick" id="dSizes"></div></div>
+        <div class="qty"><span class="label">Cantidad</span><button class="icon-btn" type="button" id="dMinus" aria-label="Menos">−</button><span id="dQty">1</span><button class="icon-btn" type="button" id="dPlus" aria-label="Más">+</button></div>
+        <button class="btn block" type="button" id="dAdd">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Datos de la clienta -->
+<div class="overlay" id="ovWho" hidden>
+  <form class="sheet" role="dialog" aria-modal="true" aria-labelledby="wTitle" id="formWho" novalidate>
+    <div class="sheet-head"><h2 id="wTitle">¿A dónde te escribimos?</h2><button class="icon-btn" type="button" data-close aria-label="Cerrar">✕</button></div>
+    <p class="muted small">Para apartar tus pijamas necesitamos tu nombre y tu WhatsApp. Te contactamos para confirmar tallas, envío y pago.</p>
+    <label class="f">Nombre<input id="wNombre" type="text" autocomplete="name" required></label>
+    <label class="f">WhatsApp<input id="wTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 123 4567" required></label>
+    <label class="f">Ciudad<input id="wCiudad" type="text" autocomplete="address-level2" placeholder="Ibagué"></label>
+    <label class="check"><input id="wAcepta" type="checkbox"> Autorizo a Bella Cristal a usar mis datos para atender mi pedido, según la Ley 1581 de 2012.</label>
+    <p class="err" id="wErr" hidden></p>
+    <button class="btn block" type="submit">Continuar</button>
+  </form>
+</div>
+
+<!-- Carrito -->
+<div class="overlay" id="ovCart" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cTitle">
+    <div class="sheet-head"><h2 id="cTitle">Tu carrito</h2><button class="icon-btn" type="button" data-close aria-label="Cerrar">✕</button></div>
+    <div id="cLines"></div>
+    <div class="cart-total"><span>Total</span><b id="cTotal"></b></div>
+    <p class="small muted">El envío se acuerda por WhatsApp según tu ciudad.</p>
+    <div class="who" id="cWho"></div>
+    <label class="f">Nota para la tienda (opcional)<textarea id="cNota" rows="2" placeholder="Ej.: color preferido, dirección, horario"></textarea></label>
+    <button class="btn block" type="button" id="cSend">Enviar pedido por WhatsApp</button>
+    <p class="small muted" id="cSendNote"></p>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+var FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDSqzT2k9o-aFy7Cy1aDbXb3EpsYuLTLRM",
+  authDomain: "bella-cristal.firebaseapp.com",
+  projectId: "bella-cristal",
+  storageBucket: "bella-cristal.firebasestorage.app",
+  messagingSenderId: "662295423990",
+  appId: "1:662295423990:web:2ff91af608dc4ee51375d7"
+};
+(function () {
+  "use strict";
+  var FB = "https://cdn.jsdelivr.net/npm/firebase@10.12.2/";
+  var K = "bellaCristal.tienda.";
+  var fmt = new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
+  function cop(v) { return fmt.format(Math.round(v || 0)); }
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function load(k) { try { return JSON.parse(localStorage.getItem(K + k) || "null"); } catch (e) { return null; } }
+  function store(k, v) { try { localStorage.setItem(K + k, JSON.stringify(v)); } catch (e) {} }
+  function norm(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function rid() { var a = new Uint8Array(12); (crypto.getRandomValues ? crypto.getRandomValues(a) : a.forEach(function (_, i) { a[i] = Math.random() * 256; })); return Array.prototype.map.call(a, function (b) { return b.toString(16).padStart(2, "0"); }).join(""); }
+  var toastT;
+  function toast(m) { var t = $("toast"); t.textContent = m; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 2400); }
+
+  var db = null, CAT = null, fotos = {};
+  var cart = load("carrito") || { id: rid(), creado: new Date().toISOString(), items: [] };
+  var cli = load("cliente");
+  var filtro = "Todas";
+
+  // ---------- catálogo ----------
+  function precioDe(it) { return it.promo > 0 ? it.promo : it.precio; }
+  function imgHTML(it) {
+    var src = it.img && it.img !== "fs" ? it.img : fotos[it.id];
+    return src ? '<img src="' + esc(src) + '" alt="' + esc(it.nombre) + '" loading="lazy">' : '<img alt="" data-fs="' + esc(it.id) + '" hidden>';
+  }
+  function cargarFotoFs(id) {
+    if (!db || fotos[id] !== undefined) return;
+    fotos[id] = "";
+    db.collection("tienda_fotos").doc(id).get().then(function (d) {
+      if (!d.exists) return;
+      fotos[id] = d.data().data;
+      document.querySelectorAll('img[data-fs="' + id + '"]').forEach(function (im) { im.src = fotos[id]; im.alt = ""; im.hidden = false; });
+    }).catch(function () {});
+  }
+  function renderChips() {
+    var cats = ["Todas"];
+    if (CAT.items.some(function (i) { return i.promo > 0 || i.promoTexto; })) cats.push("Promociones");
+    CAT.items.forEach(function (i) { if (cats.indexOf(i.cat) < 0) cats.push(i.cat); });
+    $("chips").innerHTML = cats.map(function (c) { return '<button class="chip" type="button" aria-pressed="' + (c === filtro) + '">' + esc(c) + '</button>'; }).join("");
+  }
+  $("chips").addEventListener("click", function (e) {
+    if (!e.target.classList.contains("chip")) return;
+    filtro = e.target.textContent; renderChips(); renderGrid();
+  });
+  $("q").addEventListener("input", renderGrid);
+  function renderGrid() {
+    var q = norm($("q").value);
+    var list = CAT.items.filter(function (i) {
+      if (filtro === "Promociones" && !(i.promo > 0 || i.promoTexto)) return false;
+      if (filtro !== "Todas" && filtro !== "Promociones" && i.cat !== filtro) return false;
+      return !q || norm(i.nombre + " " + i.desc + " " + i.cat).indexOf(q) >= 0;
+    });
+    $("status").hidden = !!list.length;
+    $("status").textContent = list.length ? "" : "No encontramos pijamas con esa búsqueda.";
+    $("grid").innerHTML = list.map(function (i) {
+      return '<button class="card" type="button" data-id="' + esc(i.id) + '">' +
+        '<div class="ph">' + imgHTML(i) + (i.promo > 0 || i.promoTexto ? '<span class="tag">Promo</span>' : "") + '</div>' +
+        '<div class="body"><span class="name">' + esc(i.nombre) + '</span>' +
+        '<span class="price">' + (i.promo > 0 ? '<s>' + cop(i.precio) + '</s>' : "") + '<b>' + cop(precioDe(i)) + '</b></span>' +
+        (i.promoTexto ? '<span class="promo-text">' + esc(i.promoTexto) + '</span>' : "") +
+        '<span class="sizes">Tallas: ' + esc((i.tallas || []).join(", ")) + '</span></div></button>';
+    }).join("");
+    list.forEach(function (i) { if (i.img === "fs") cargarFotoFs(i.id); });
+  }
+  $("grid").addEventListener("click", function (e) {
+    var c = e.target.closest(".card"); if (c) abrirDetalle(c.dataset.id);
+  });
+
+  // ---------- hojas ----------
+  var lastFocus = null;
+  function abrir(id) { lastFocus = document.activeElement; $(id).hidden = false; document.body.classList.add("lock"); var f = $(id).querySelector("input, button:not([data-close])"); if (f) f.focus(); }
+  function cerrar(id) { $(id).hidden = true; if (!document.querySelector(".overlay:not([hidden])")) document.body.classList.remove("lock"); if (lastFocus) lastFocus.focus(); }
+  document.querySelectorAll(".overlay").forEach(function (ov) {
+    ov.addEventListener("click", function (e) { if (e.target === ov || e.target.hasAttribute("data-close")) cerrar(ov.id); });
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { var o = document.querySelectorAll(".overlay:not([hidden])"); if (o.length) cerrar(o[o.length - 1].id); } });
+
+  var actual = null, talla = null, cant = 1, pendiente = null;
+  function abrirDetalle(id) {
+    actual = CAT.items.find(function (i) { return i.id === id; }); if (!actual) return;
+    talla = (actual.tallas || [])[0] || "Única"; cant = 1;
+    $("dName").textContent = actual.nombre;
+    $("dPh").innerHTML = imgHTML(actual);
+    if (actual.img === "fs") cargarFotoFs(actual.id);
+    $("dPrice").innerHTML = (actual.promo > 0 ? '<s>' + cop(actual.precio) + '</s>' : "") + '<b>' + cop(precioDe(actual)) + '</b>';
+    $("dPromo").textContent = actual.promoTexto || ""; $("dPromo").hidden = !actual.promoTexto;
+    $("dDesc").textContent = actual.desc || ""; $("dDesc").hidden = !actual.desc;
+    pintarTallas(); $("dQty").textContent = cant;
+    abrir("ovDetail");
+  }
+  function pintarTallas() {
+    $("dSizes").innerHTML = (actual.tallas && actual.tallas.length ? actual.tallas : ["Única"]).map(function (t) { return '<button type="button" aria-pressed="' + (t === talla) + '">' + esc(t) + '</button>'; }).join("");
+  }
+  $("dSizes").addEventListener("click", function (e) { if (e.target.tagName === "BUTTON") { talla = e.target.textContent; pintarTallas(); } });
+  $("dMinus").addEventListener("click", function () { cant = Math.max(1, cant - 1); $("dQty").textContent = cant; });
+  $("dPlus").addEventListener("click", function () { cant = Math.min(20, cant + 1); $("dQty").textContent = cant; });
+  $("dAdd").addEventListener("click", function () {
+    var linea = { id: actual.id, nombre: actual.nombre, talla: talla, cant: cant, precio: precioDe(actual) };
+    if (!cli) { pendiente = linea; cerrar("ovDetail"); abrirDatos(); return; }
+    agregar(linea); cerrar("ovDetail");
+  });
+  function agregar(l) {
+    var ex = cart.items.find(function (x) { return x.id === l.id && x.talla === l.talla; });
+    if (ex) ex.cant = Math.min(20, ex.cant + l.cant); else cart.items.push(l);
+    guardarCarrito(); toast(l.nombre + " (" + l.talla + ") agregada al carrito");
+  }
+
+  // ---------- datos de la clienta ----------
+  function abrirDatos() {
+    $("wNombre").value = cli ? cli.nombre : ""; $("wTel").value = cli ? cli.telefono : ""; $("wCiudad").value = cli ? cli.ciudad : "";
+    $("wAcepta").checked = !!cli; $("wErr").hidden = true;
+    abrir("ovWho");
+  }
+  $("formWho").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nombre = $("wNombre").value.trim(), tel = $("wTel").value.trim(), dig = tel.replace(/\D/g, "");
+    var err = !nombre ? "Escribe tu nombre." : (dig.length < 7 || dig.length > 15) ? "Escribe un número de WhatsApp válido, por ejemplo 300 123 4567." : !$("wAcepta").checked ? "Para continuar, marca la autorización de datos." : "";
+    if (err) { $("wErr").textContent = err; $("wErr").hidden = false; return; }
+    cli = { nombre: nombre.slice(0, 80), telefono: tel.slice(0, 20), ciudad: $("wCiudad").value.trim().slice(0, 60) };
+    store("cliente", cli);
+    cerrar("ovWho");
+    if (pendiente) { agregar(pendiente); pendiente = null; } else { guardarCarrito(); renderCart(); }
+  });
+
+  // ---------- carrito ----------
+  var syncT;
+  function total() { return cart.items.reduce(function (a, l) { return a + l.cant * l.precio; }, 0); }
+  function guardarCarrito() {
+    store("carrito", cart); renderFab();
+    if (!$("ovCart").hidden) renderCart();
+    clearTimeout(syncT); syncT = setTimeout(sincronizar, 600);
+  }
+  function sincronizar(estado) {
+    if (!db || !cli) return Promise.resolve();
+    return db.collection("pedidos").doc(cart.id).set({
+      nombre: cli.nombre, telefono: cli.telefono, ciudad: cli.ciudad || "", acepta: true,
+      items: cart.items.map(function (l) { return { id: l.id, nombre: l.nombre, talla: l.talla, cant: l.cant, precio: l.precio }; }).slice(0, 40),
+      total: total(), estado: estado || "carrito", nota: ($("cNota").value || "").slice(0, 300),
+      creado: cart.creado, actualizado: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+  function renderFab() {
+    var n = cart.items.reduce(function (a, l) { return a + l.cant; }, 0);
+    $("fab").hidden = !n; $("fabCount").textContent = n; $("fabTotal").textContent = cop(total());
+  }
+  function renderCart() {
+    $("cLines").innerHTML = cart.items.map(function (l, i) {
+      var it = CAT && CAT.items.find(function (x) { return x.id === l.id; });
+      var src = it ? (it.img && it.img !== "fs" ? it.img : fotos[it.id]) : "";
+      return '<div class="cart-line">' + (src ? '<img src="' + esc(src) + '" alt="">' : '<div class="noimg"></div>') +
+        '<div><div class="name">' + esc(l.nombre) + '</div><div class="meta">Talla ' + esc(l.talla) + ' · ' + cop(l.precio) + '</div>' +
+        '<div class="qty"><button class="icon-btn" type="button" data-i="' + i + '" data-d="-1" aria-label="Menos">−</button><span>' + l.cant + '</span><button class="icon-btn" type="button" data-i="' + i + '" data-d="1" aria-label="Más">+</button></div></div>' +
+        '<b class="num">' + cop(l.cant * l.precio) + '</b></div>';
+    }).join("") || '<p class="muted">Tu carrito está vacío.</p>';
+    $("cTotal").textContent = cop(total());
+    $("cWho").innerHTML = cli ? '<span>' + esc(cli.nombre) + ' · ' + esc(cli.telefono) + (cli.ciudad ? ' · ' + esc(cli.ciudad) : "") + '</span><button class="linkbtn" type="button" id="cEdit">Cambiar</button>' : "";
+    $("cSend").disabled = !cart.items.length;
+    $("cSendNote").textContent = CAT && CAT.whatsapp ? "Se abrirá WhatsApp con tu pedido listo para enviar." : "Te contactaremos a tu WhatsApp para confirmar.";
+  }
+  $("cLines").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-i]"); if (!b) return;
+    var l = cart.items[+b.dataset.i]; l.cant += +b.dataset.d;
+    if (l.cant <= 0) cart.items.splice(+b.dataset.i, 1);
+    guardarCarrito(); renderCart();
+  });
+  $("cWho").addEventListener("click", function (e) { if (e.target.id === "cEdit") abrirDatos(); });
+  $("cNota").addEventListener("input", function () { clearTimeout(syncT); syncT = setTimeout(sincronizar, 900); });
+  $("fab").addEventListener("click", function () { renderCart(); abrir("ovCart"); });
+  $("cSend").addEventListener("click", function () {
+    if (!cart.items.length) return;
+    var msg = ["Hola Bella Cristal, quiero hacer este pedido:"];
+    cart.items.forEach(function (l) { msg.push("• " + l.cant + " × " + l.nombre + " (talla " + l.talla + ") — " + cop(l.cant * l.precio)); });
+    msg.push("Total: " + cop(total()));
+    msg.push("Nombre: " + cli.nombre + (cli.ciudad ? " · Ciudad: " + cli.ciudad : ""));
+    if ($("cNota").value.trim()) msg.push("Nota: " + $("cNota").value.trim());
+    var url = CAT && CAT.whatsapp ? "https://wa.me/" + CAT.whatsapp + "?text=" + encodeURIComponent(msg.join("\n")) : "";
+    var b = $("cSend"); b.disabled = true;
+    sincronizar("enviado").catch(function () {}).then(function () {
+      cart = { id: rid(), creado: new Date().toISOString(), items: [] };
+      store("carrito", cart); $("cNota").value = ""; renderFab(); cerrar("ovCart");
+      toast("¡Pedido enviado! Te escribiremos pronto.");
+      b.disabled = false;
+      if (url) location.href = url;
+    });
+  });
+
+  // ---------- arranque ----------
+  function loadScript(src) { return new Promise(function (ok, fail) { var s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = fail; document.head.appendChild(s); }); }
+  renderFab();
+  loadScript(FB + "firebase-app-compat.js").then(function () { return loadScript(FB + "firebase-firestore-compat.js"); }).then(function () {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.firestore();
+    return db.collection("tienda").doc("catalogo").get();
+  }).then(function (d) {
+    if (!d.exists || !(d.data().items || []).length) { $("status").textContent = "Estamos preparando la tienda. Vuelve pronto."; return; }
+    CAT = d.data();
+    $("storeName").textContent = CAT.nombre || "Bella Cristal";
+    if (CAT.mensaje) $("storeMsg").textContent = CAT.mensaje;
+    // Los precios del carrito se actualizan si la tienda los cambió.
+    cart.items = cart.items.filter(function (l) { var it = CAT.items.find(function (x) { return x.id === l.id; }); if (it) l.precio = precioDe(it); return !!it; });
+    store("carrito", cart); renderFab();
+    renderChips(); renderGrid();
+  }).catch(function () {
+    $("status").textContent = "No pudimos cargar el catálogo. Revisa tu conexión a internet y recarga la página.";
+  });
+})();
+</script>
+</body>
+</html>

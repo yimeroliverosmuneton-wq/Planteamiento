@@ -4,6 +4,8 @@ Herramienta web (funciona en celular y computador) que aplica el modelo costo-vo
 
 Página publicada: https://yimeroliverosmuneton-wq.github.io/Planteamiento/
 
+Tienda para clientas (sin cuenta): https://yimeroliverosmuneton-wq.github.io/Planteamiento/tienda.html
+
 Cada persona crea su cuenta e inicia sesión; la información queda guardada en su cuenta. Para guardar las cuentas en la nube y entrar desde cualquier dispositivo, siga [FIREBASE.md](FIREBASE.md).
 
 ## Qué calcula
@@ -17,6 +19,7 @@ Cada persona crea su cuenta e inicia sesión; la información queda guardada en 
 - Indicadores de marketing digital (interacción, conversión, CAC, ROAS) ligados al margen.
 - **Catálogo**: carga un PDF de catálogo mayorista (una prenda por página), lee nombre, tallas y precio mayorista, y permite poner al lado el precio de venta con su ganancia y margen. Trae precargada la nueva colección (67 prendas).
 - **Factura de venta**: arma la factura con prendas del catálogo, datos de la clienta, descuento, envío e IVA opcional; genera la imagen de la factura, el texto para WhatsApp y un registro de ventas con ganancia bruta.
+- **Tienda en línea** (`tienda.html`): catálogo público con precios al detal, promociones, descripción, tallas y carrito. Al agregar la primera prenda la clienta deja nombre y WhatsApp (con autorización de datos, Ley 1581 de 2012) y el carrito aparece al instante en la pestaña **Tienda** de la administración, donde se puede escribirle por WhatsApp o pasar el pedido a factura.
 - Contraste automático de la hipótesis y lista de acciones propuestas, más un resumen de texto para pegar en el informe.
 
 Las cifras iniciales son de ejemplo y deben reemplazarse con los registros reales.

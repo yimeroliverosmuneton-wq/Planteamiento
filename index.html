@@ -247,6 +247,22 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
 .who { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; font-size: .88rem; }
 .who-name { font-weight: 600; overflow-wrap: anywhere; }
 @media (max-width: 560px) { .top-side { align-items: stretch; width: 100%; } .who { justify-content: flex-start; } }
+
+/* Tienda y pedidos (administración) */
+.badge { display: inline-block; min-width: 1.3em; padding: 0 5px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font: 700 .7rem/1.3em var(--f-body); text-align: center; vertical-align: 2px; }
+.store-url { font-family: var(--f-num); font-size: .85rem; color: var(--accent); overflow-wrap: anywhere; }
+.promo-tag { color: var(--accent); }
+.ci textarea { font-family: var(--f-body); font-size: .9rem; min-height: 4.5rem; }
+.ped-list { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); }
+.pedido { display: flex; flex-direction: column; gap: 10px; }
+.ped-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.ped-head .name { font-weight: 700; font-family: var(--f-display); font-size: 1.05rem; }
+.ped-tel { font-size: 1rem; color: var(--accent); user-select: all; }
+.ped-head .meta { font-size: .8rem; color: var(--muted); }
+.ped-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: .88rem; }
+.ped-items li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--line); padding-bottom: 4px; }
+.ped-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+a.btn { text-decoration: none; display: inline-block; }
 @media (prefers-reduced-motion: no-preference) { .bar { transition: width .3s ease; } }
 </style>
 
@@ -290,7 +306,7 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
       </div>
     </div>
     <div class="top-side">
-      <div class="who"><span class="who-name" id="whoName"></span><span class="pill good" id="syncState">Listo</span><button class="btn quiet" type="button" id="logoutBtn">Cerrar sesión</button></div>
+      <div class="who"><span class="who-name" id="whoName"></span><span class="pill good" id="syncState">Listo</span><a class="btn ghost" href="https://yimeroliverosmuneton-wq.github.io/Planteamiento/tienda.html" target="_blank" rel="noopener" id="verTienda">Ver tienda</a><button class="btn quiet" type="button" id="logoutBtn">Cerrar sesión</button></div>
       <label class="f period">Periodo analizado
         <input id="periodo" type="text">
       </label>
@@ -301,6 +317,7 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
     <button role="tab" data-tab="diag" aria-selected="true">Diagnóstico</button>
     <button role="tab" data-tab="cat" aria-selected="false">Catálogo</button>
     <button role="tab" data-tab="fac" aria-selected="false">Factura</button>
+    <button role="tab" data-tab="tienda" aria-selected="false">Tienda <span class="badge" id="pedBadge" hidden></span></button>
     <button role="tab" data-tab="prod" aria-selected="false">Productos</button>
     <button role="tab" data-tab="gast" aria-selected="false">Gastos</button>
     <button role="tab" data-tab="esc" aria-selected="false">Escenarios</button>
@@ -429,6 +446,37 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
       <div class="kpis" id="histKpis"></div>
       <div class="card tscroll"><table id="hist"></table></div>
       <img class="inv-img" id="histImg" alt="Factura registrada" hidden>
+    </div>
+  </section>
+
+  <!-- TIENDA -->
+  <section class="panel" id="tab-tienda" role="tabpanel" hidden>
+    <div class="block">
+      <h2>Tienda en línea</h2>
+      <p class="lead small">Página pública para las clientas: sin inicio de sesión, ven el catálogo con precios al detal, promociones y descripción, y arman su carrito. Salen las prendas del Catálogo que tienen precio de venta y no están ocultas. Las descripciones y promociones se escriben en Catálogo, en «Editar».</p>
+    </div>
+    <div class="example-note" id="tiendaNube" hidden><span><b>Necesita la nube.</b> La tienda y los pedidos funcionan en la página de GitHub con su cuenta iniciada (yimeroliverosmuneton-wq.github.io/Planteamiento).</span></div>
+    <div class="card block">
+      <div class="row" style="justify-content:space-between">
+        <div style="min-width:0"><div class="eyebrow">Enlace para las clientas</div><a id="tiendaLink" class="store-url" target="_blank" rel="noopener"><span id="tiendaUrl"></span></a></div>
+        <button class="btn ghost" id="tiendaCopy" type="button">Copiar enlace</button>
+      </div>
+      <div class="grid">
+        <label class="f">WhatsApp de la tienda (recibe los pedidos)<input id="tiendaWa" type="tel" placeholder="3001234567"></label>
+        <label class="f">Mensaje de bienvenida<input id="tiendaMsg" type="text"></label>
+      </div>
+      <div class="row"><button class="btn" id="tiendaPub" type="button">Publicar catálogo en la tienda</button></div>
+      <p class="small muted" id="tiendaStatus" aria-live="polite">Publique cada vez que cambie precios, promociones o descripciones.</p>
+    </div>
+    <div class="kpis" id="tiendaKpis"></div>
+    <div class="block">
+      <div class="row" style="justify-content:space-between">
+        <h2>Pedidos y carritos</h2>
+        <label class="f" style="width:12rem">Mostrar<select id="pedFiltro"><option value="pend">Pendientes</option><option value="carrito">Carritos abiertos</option><option value="enviado">Pedidos enviados</option><option value="atendido">Atendidos</option><option value="todos">Todos</option></select></label>
+      </div>
+      <p class="lead small">Cada carrito aparece en cuanto la clienta agrega su primera prenda, con su nombre y número de WhatsApp. Se actualiza solo.</p>
+      <p class="small" id="pedMsg" aria-live="polite"></p>
+      <div class="ped-list" id="pedidos"></div>
     </div>
   </section>
 
@@ -1118,7 +1166,7 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
       var th = thumbs[it.id];
       return '<div class="ci" data-id="' + it.id + '">' +
         (th ? '<img class="thumb" src="' + th + '" alt="" loading="lazy">' : '<div class="thumb"></div>') +
-        '<div class="info"><div><div class="name">' + esc(it.nombre) + '</div><div class="meta">' + esc(it.tallas || "Talla única") + (it.page ? " · pág. " + it.page : "") + (it.promo ? " · " + esc(it.promo) : "") + '</div></div>' +
+        '<div class="info"><div><div class="name">' + esc(it.nombre) + '</div><div class="meta">' + esc(it.tallas || "Talla única") + (it.page ? " · pág. " + it.page : "") + (it.promo ? " · " + esc(it.promo) : "") + (num(it.promoVenta) > 0 ? ' · <b class="promo-tag">Promo ' + cop(num(it.promoVenta)) + '</b>' : "") + (it.oculto ? " · Oculta en tienda" : "") + '</div></div>' +
         '<div class="wh"><div class="eyebrow">Mayorista</div>' + cop(num(it.mayor)) + '</div></div>' +
         '<div class="ctrl">' +
           '<label class="f">Mi precio de venta<input id="' + it.id + '-venta" data-k="venta" type="number" min="0" step="1000" inputmode="numeric" value="' + (num(it.venta) || "") + '" placeholder="' + (isFinite(sugerido(it)) ? fmtN.format(sugerido(it)) : "") + '"></label>' +
@@ -1130,6 +1178,10 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
           '<label class="f">Nombre<input id="' + it.id + '-nombre" data-k="nombre" type="text" value="' + esc(it.nombre) + '"></label>' +
           '<label class="f">Tallas<input id="' + it.id + '-tallas" data-k="tallas" type="text" value="' + esc(it.tallas || "") + '"></label>' +
           '<label class="f">Precio mayorista<input id="' + it.id + '-mayor" data-k="mayor" type="number" min="0" step="500" value="' + num(it.mayor) + '"></label>' +
+          '<label class="f">Precio de promoción en tienda<input id="' + it.id + '-promoVenta" data-k="promoVenta" type="number" min="0" step="1000" placeholder="Opcional" value="' + (num(it.promoVenta) || "") + '"></label>' +
+          '<label class="f">Texto de la promoción<input id="' + it.id + '-promoTexto" data-k="promoTexto" type="text" placeholder="Ej.: 2 por $100.000" value="' + esc(it.promoTexto || "") + '"></label>' +
+          '<label class="f" style="grid-column:1/-1">Descripción para la tienda<textarea id="' + it.id + '-desc" data-k="desc" rows="3" placeholder="Tela, detalles, cómo queda, cuidados…">' + esc(it.desc || "") + '</textarea></label>' +
+          '<label class="check"><input id="' + it.id + '-oculto" data-k="oculto" type="checkbox"' + (it.oculto ? " checked" : "") + '> Ocultar en la tienda</label>' +
           '<div class="row" style="align-self:end"><button class="btn quiet" type="button" data-act="prod">Llevar a Productos</button><button class="btn danger" type="button" data-act="del">Quitar</button></div>' +
         '</div></div>';
     }).join("") || '<p class="muted small">No hay prendas que coincidan.</p>';
@@ -1162,7 +1214,7 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
   $("catList").addEventListener("input", function (e) {
     var row = e.target.closest(".ci"); if (!row || !e.target.dataset.k) return;
     var it = catItem(row.dataset.id), k = e.target.dataset.k;
-    it[k] = (k === "venta" || k === "mayor") ? num(e.target.value) : e.target.value;
+    it[k] = e.target.type === "checkbox" ? e.target.checked : (k === "venta" || k === "mayor" || k === "promoVenta") ? num(e.target.value) : e.target.value;
     if (k === "mayor") { var inp = $(it.id + "-venta"); if (inp) inp.placeholder = fmtN.format(sugerido(it)); }
     updateGain(it); renderCatKpis(); softSave();
   });
@@ -1243,7 +1295,7 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
       var page = await doc.getPage(p), vp = page.getViewport({ scale: 1 });
       var tc = await page.getTextContent();
       var its = tc.items.filter(function (i) { return i.str && i.str.trim(); }).map(function (i) {
-        return { s: i.str.trim(), x: i.transform[4], y: i.transform[5], h: Math.abs(i.height || i.transform[3]) || 10 };
+        return { s: i.str.trim(), x: i.transform[4], y: i.transform[5], h: Math.abs(i.height || i.transform[3]) || 10, w: i.width };
       }).filter(function (i) { return !(/^\d{1,3}$/.test(i.s) && i.x > vp.width * 0.5); });
       var seen = {};
       its = its.filter(function (i) { var k = i.s + "|" + Math.round(i.x) + "|" + Math.round(i.y); if (seen[k]) return false; seen[k] = 1; return true; });
@@ -1264,15 +1316,31 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
           var cv = document.createElement("canvas"); cv.width = Math.ceil(v2.width); cv.height = Math.ceil(v2.height);
           await page.render({ canvasContext: cv.getContext("2d"), viewport: v2 }).promise;
           th[id] = cv.toDataURL("image/jpeg", 0.62);
+          var v3 = page.getViewport({ scale: 480 / vp.width });
+          var cv3 = document.createElement("canvas"); cv3.width = Math.ceil(v3.width); cv3.height = Math.ceil(v3.height);
+          await page.render({ canvasContext: cv3.getContext("2d"), viewport: v3 }).promise;
+          // Difumina el precio mayorista impreso en la foto para que las clientas no lo vean.
+          var cx3 = cv3.getContext("2d"), k3 = 480 / vp.width;
+          its.forEach(function (t) {
+            if (!/^(\$?\s*\d{1,3}([.,]\d{3})+|PRECIO|PROMOCI[OÓ]N|\d+\s*X\s*\$?[\d.,]+.*)$/i.test(t.s)) return;
+            var pt = v3.convertToViewportPoint(t.x, t.y), w = (t.w || t.s.length * t.h * 0.6) * k3, hh = t.h * k3;
+            var bx = Math.max(0, pt[0] - 6), by = Math.max(0, pt[1] - hh * 0.9), bw = w + 12, bh = hh * 1.15 + 4;
+            cx3.save(); cx3.beginPath(); cx3.rect(bx, by, bw, bh); cx3.clip(); cx3.filter = "blur(10px)"; cx3.drawImage(cv3, 0, 0); cx3.drawImage(cv3, 0, 0); cx3.restore();
+          });
+          fotosGrandes[id] = cv3.toDataURL("image/jpeg", 0.72);
         } catch (e) {}
       }
     }
     prog.hidden = true; st.textContent = "";
     if (!items.length) { st.textContent = "No se encontró texto con precios en este PDF. Si es un catálogo escaneado, agregue las prendas a mano."; return; }
     var prev = {};
-    S.catalogo.items.forEach(function (it) { if (num(it.venta)) prev[it.nombre.toLowerCase()] = it.venta; });
+    S.catalogo.items.forEach(function (it) { prev[it.nombre.toLowerCase()] = it; });
     var kept = 0;
-    items.forEach(function (it) { var v = prev[it.nombre.toLowerCase()]; if (v) { it.venta = v; kept++; } });
+    items.forEach(function (it) {
+      var o = prev[it.nombre.toLowerCase()]; if (!o) return;
+      if (num(o.venta)) { it.venta = o.venta; kept++; }
+      ["desc", "promoVenta", "promoTexto", "oculto"].forEach(function (k) { if (o[k]) it[k] = o[k]; });
+    });
     S.catalogo = { nombre: file.name.replace(/\.pdf$/i, ""), items: items };
     thumbs = th; saveThumbs();
     $("catQ").value = "";
@@ -1510,7 +1578,138 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
     }
   });
   function softSave() { save(); }
-  function renderExtra() { loadThumbs(); fillFacturaForm(); renderCatalogo(); renderFactura(); renderHist(); }
+  // =========================================================
+  // TIENDA EN LÍNEA (publicación) Y PEDIDOS DE CLIENTAS
+  // =========================================================
+  var TIENDA_URL = "https://yimeroliverosmuneton-wq.github.io/Planteamiento/tienda.html";
+  var fotosGrandes = {};
+  var pedidos = [], pedUnsub = null;
+  function cloud() { return window.BCCloud || null; }
+  function categoria(nombre) {
+    var n = nombre.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    if (/bata|kimono/.test(n)) return "Batas y kimonos";
+    if (/pantalon|capri/.test(n)) return "Pantalón y capri";
+    if (/nino|\bml$|\bmc$/.test(n)) return "Niños";
+    if (/conjunto|queen|trio|baby|enterizo|bluson|blusa|crop|satin/.test(n)) return "Conjuntos";
+    if (/hombre/.test(n)) return "Hombre";
+    return "Conjuntos";
+  }
+  function telWa(t) { var d = String(t || "").replace(/\D/g, ""); if (d.length === 10 && d[0] === "3") d = "57" + d; return d; }
+  function itemsTienda() {
+    return S.catalogo.items.filter(function (it) { return !it.oculto && num(it.venta) > 0; });
+  }
+  function renderTienda() {
+    S.tienda = S.tienda || { whatsapp: S.vendedor.tel || "", mensaje: "Pijamas cómodas y hermosas con envío a toda Colombia.", publicado: "" };
+    $("tiendaUrl").textContent = TIENDA_URL; $("tiendaLink").href = TIENDA_URL;
+    $("tiendaWa").value = S.tienda.whatsapp || ""; $("tiendaMsg").value = S.tienda.mensaje || "";
+    var vis = itemsTienda(), sinP = S.catalogo.items.filter(function (it) { return !it.oculto && !(num(it.venta) > 0); }).length;
+    var promo = vis.filter(function (it) { return num(it.promoVenta) > 0 || it.promoTexto; }).length;
+    $("tiendaKpis").innerHTML = [
+      ["Prendas que se publican", n(vis.length), "pos"], ["Sin precio de venta (no salen)", n(sinP), sinP ? "neg" : ""], ["En promoción", n(promo), ""],
+      ["Última publicación", S.tienda.publicado ? new Date(S.tienda.publicado).toLocaleString("es-CO", { dateStyle: "medium", timeStyle: "short" }) : "Nunca", ""]
+    ].map(function (k) { return '<div class="kpi"><span class="eyebrow">' + k[0] + '</span><span class="v ' + k[2] + '">' + k[1] + '</span></div>'; }).join("");
+    var c = cloud();
+    $("tiendaNube").hidden = !!c;
+    $("tiendaPub").disabled = !c;
+    if (c && !pedUnsub) escucharPedidos();
+    renderPedidos();
+  }
+  $("tiendaWa").addEventListener("input", function (e) { S.tienda.whatsapp = e.target.value; softSave(); });
+  $("tiendaMsg").addEventListener("input", function (e) { S.tienda.mensaje = e.target.value; softSave(); });
+  $("tiendaCopy").addEventListener("click", function () {
+    var ta = $("resumen"), old = ta.value; ta.value = TIENDA_URL; copyFrom("resumen", "Enlace de la tienda copiado"); setTimeout(function () { ta.value = old; }, 400);
+  });
+  $("tiendaPub").addEventListener("click", async function () {
+    var c = cloud(); if (!c) return;
+    var b = $("tiendaPub"), st = $("tiendaStatus");
+    var vis = itemsTienda();
+    if (!vis.length) { st.textContent = "No hay prendas con precio de venta. Póngales precio en Catálogo."; return; }
+    b.disabled = true; st.textContent = "Publicando " + vis.length + " prendas…";
+    try {
+      var ref = c.db.collection("tienda").doc("catalogo");
+      var fotos = [];
+      var items = vis.map(function (it) {
+        var img = "";
+        if (S.catalogo.seed && it.page) img = "assets/catalogo/p" + it.page + ".webp";
+        else if (fotosGrandes[it.id] || thumbs[it.id]) { img = "fs"; fotos.push(it); }
+        return { id: it.id, nombre: it.nombre, tallas: tallasDe(it.tallas), precio: num(it.venta), promo: num(it.promoVenta) > 0 && num(it.promoVenta) < num(it.venta) ? num(it.promoVenta) : 0,
+          promoTexto: it.promoTexto || "", desc: it.desc || "", cat: categoria(it.nombre), img: img };
+      });
+      await ref.set({ ownerUid: c.uid, nombre: S.vendedor.nombre || "Bella Cristal", whatsapp: telWa(S.tienda.whatsapp), mensaje: S.tienda.mensaje || "",
+        items: items, actualizado: c.firebase.firestore.FieldValue.serverTimestamp() });
+      for (var i = 0; i < fotos.length; i++) {
+        st.textContent = "Subiendo fotos " + (i + 1) + " de " + fotos.length + "…";
+        await c.db.collection("tienda_fotos").doc(fotos[i].id).set({ data: fotosGrandes[fotos[i].id] || thumbs[fotos[i].id] });
+      }
+      S.tienda.publicado = new Date().toISOString(); softSave();
+      st.textContent = "Tienda publicada con " + items.length + " prendas.";
+      if (!pedUnsub) escucharPedidos();
+      renderTienda(); toast("Tienda publicada");
+    } catch (e) {
+      st.textContent = e && e.code === "permission-denied"
+        ? "Firebase no permitió publicar. Revise que pegó las reglas nuevas de FIREBASE.md; si la tienda ya fue publicada con otra cuenta, solo esa cuenta puede actualizarla."
+        : "No se pudo publicar: " + (e && e.message ? e.message : "revise la conexión") + ".";
+    }
+    b.disabled = false;
+  });
+
+  // ---------- pedidos ----------
+  function escucharPedidos() {
+    var c = cloud(); if (!c) return;
+    pedUnsub = c.db.collection("pedidos").orderBy("actualizado", "desc").limit(150).onSnapshot(function (snap) {
+      pedidos = snap.docs.map(function (d) { var x = d.data(); x.id = d.id; return x; }).filter(function (p) { return p.items && p.items.length; });
+      $("pedMsg").textContent = "";
+      renderPedidos();
+    }, function (e) {
+      pedUnsub = null;
+      $("pedMsg").textContent = e && e.code === "permission-denied" ? "Publique la tienda con esta cuenta para ver aquí los pedidos de las clientas." : "No se pudieron cargar los pedidos.";
+    });
+  }
+  var ESTADOS = { carrito: ["Carrito abierto", "warn"], enviado: ["Pedido enviado", "bad"], atendido: ["Atendido", "good"] };
+  function fechaHora(ts) { var d = ts && ts.toDate ? ts.toDate() : (ts ? new Date(ts) : null); return d ? d.toLocaleString("es-CO", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }) : ""; }
+  function renderPedidos() {
+    var f = $("pedFiltro").value;
+    var list = pedidos.filter(function (p) { return f === "todos" ? true : f === "pend" ? p.estado !== "atendido" : p.estado === f; });
+    var pend = pedidos.filter(function (p) { return p.estado !== "atendido"; }).length;
+    $("pedBadge").textContent = pend ? String(pend) : ""; $("pedBadge").hidden = !pend;
+    $("pedidos").innerHTML = list.map(function (p) {
+      var e = ESTADOS[p.estado] || ESTADOS.carrito, wa = telWa(p.telefono);
+      var saludo = encodeURIComponent("Hola " + (p.nombre || "") + ", te escribimos de Bella Cristal por tu pedido: " + p.items.map(function (i) { return i.cant + " × " + i.nombre + " (" + i.talla + ")"; }).join(", ") + ".");
+      return '<div class="card pedido" data-id="' + esc(p.id) + '">' +
+        '<div class="ped-head"><div><div class="name">' + esc(p.nombre || "Sin nombre") + '</div><div class="ped-tel num">' + esc(p.telefono || "") + '</div><div class="meta">' + esc(p.ciudad || "") + (p.ciudad ? " · " : "") + fechaHora(p.actualizado) + '</div></div>' +
+        '<span class="pill ' + e[1] + '">' + e[0] + '</span></div>' +
+        '<ul class="ped-items">' + p.items.map(function (i) { return '<li><span>' + n(num(i.cant)) + ' × ' + esc(i.nombre) + ' · ' + esc(i.talla) + '</span><span class="num">' + cop(num(i.cant) * num(i.precio)) + '</span></li>'; }).join("") + '</ul>' +
+        (p.nota ? '<p class="small muted">Nota: ' + esc(p.nota) + '</p>' : "") +
+        '<div class="ped-foot"><b class="num">' + cop(num(p.total)) + '</b><div class="row">' +
+          (wa ? '<a class="btn" href="https://wa.me/' + wa + '?text=' + saludo + '" target="_blank" rel="noopener">WhatsApp</a>' : "") +
+          '<button class="btn ghost" type="button" data-ped="fac">Facturar</button>' +
+          (p.estado !== "atendido" ? '<button class="btn quiet" type="button" data-ped="ok">Atendido</button>' : "") +
+          '<button class="btn quiet" type="button" data-ped="del">Borrar</button></div></div></div>';
+    }).join("") || '<p class="muted small">' + (cloud() ? "Todavía no hay pedidos. Cuando una clienta agregue algo al carrito aparecerá aquí con su número." : "") + '</p>';
+  }
+  $("pedFiltro").addEventListener("change", renderPedidos);
+  $("pedidos").addEventListener("click", function (e) {
+    var act = e.target.dataset && e.target.dataset.ped; if (!act) return;
+    var card = e.target.closest(".pedido"), p = pedidos.find(function (x) { return x.id === card.dataset.id; }), c = cloud();
+    if (!p || !c) return;
+    var ref = c.db.collection("pedidos").doc(p.id);
+    if (act === "ok") ref.update({ estado: "atendido" }).catch(function () { toast("No se pudo actualizar el pedido"); });
+    if (act === "del") {
+      if (e.target.dataset.armed) ref.delete().catch(function () { toast("No se pudo borrar"); });
+      else { e.target.dataset.armed = "1"; e.target.textContent = "¿Borrar?"; e.target.classList.add("danger"); }
+    }
+    if (act === "fac") {
+      S.factura = nuevaFactura();
+      S.factura.cli = { nombre: p.nombre || "", doc: "", tel: p.telefono || "", dir: "", ciudad: p.ciudad || "" };
+      S.factura.lineas = p.items.map(function (i) {
+        var it = S.catalogo.items.find(function (x) { return x.id === i.id; });
+        return { id: uid("l"), nombre: i.nombre, talla: i.talla, tallas: it ? tallasDe(it.tallas) : [i.talla], cant: num(i.cant), precio: num(i.precio), costo: it ? costoPrenda(it) : 0 };
+      });
+      fillFacturaForm(); renderFactura(); softSave();
+      document.querySelector('[data-tab="fac"]').click(); toast("Pedido pasado a la factura");
+    }
+  });
+  function renderExtra() { loadThumbs(); fillFacturaForm(); renderCatalogo(); renderFactura(); renderHist(); renderTienda(); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (STORE) drawInvoiceSoon(); });
 
   var raf;
@@ -1700,6 +1899,7 @@ var FIREBASE_CONFIG = {
       if (prev) { data = prev.estado; store.setThumbs(prev.thumbs); if (prev.thumbs) store.saveThumbs(prev.thumbs); }
       await ref.set({ nombre: user.displayName || "", correo: user.email, creado: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
     }
+    window.BCCloud = { db: fdb, uid: user.uid, email: user.email, firebase: firebase };
     enterApp(user.displayName, user.email, data, store);
   }
 
