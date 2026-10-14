@@ -70,7 +70,7 @@ La página ya tiene inicio de sesión y creación de cuenta. Sin configuración,
      appId: "1:123...:web:abc..."
    };
    ```
-7. En `index.html`, la línea `var FIREBASE_CONFIG = ...` ya tiene la configuración del proyecto `bella-cristal`. Estos datos no son secretos: la protección la dan las reglas del paso 5.
+7. En `index.html`, la línea `var FIREBASE_CONFIG = ...` ya tiene la configuración del proyecto `bella-cristal-35f57` (la usan `index.html` y `tienda.html`). Estos datos no son secretos: la protección la dan las reglas del paso 5.
 
 Al abrir la página, debajo del formulario dirá «Sus datos se guardan en la nube». Si alguien ya tenía datos en ese navegador sin cuenta, pasan automáticamente a la primera cuenta que se cree ahí.
 
