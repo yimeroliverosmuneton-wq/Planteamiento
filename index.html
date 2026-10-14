@@ -1506,7 +1506,15 @@ textarea { font-family: var(--f-num); font-size: .78rem; min-height: 9rem; resiz
    su proyecto de Firebase. Si se deja en null, las cuentas y sus
    datos se guardan solo en el navegador donde se crean.
    ========================================================= */
-var FIREBASE_CONFIG = null;
+var FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDSqzT2k9o-aFy7Cy1aDbXb3EpsYuLTLRM",
+  authDomain: "bella-cristal.firebaseapp.com",
+  projectId: "bella-cristal",
+  storageBucket: "bella-cristal.firebasestorage.app",
+  messagingSenderId: "662295423990",
+  appId: "1:662295423990:web:2ff91af608dc4ee51375d7",
+  measurementId: "G-KVK0KVY533"
+};
 
 (function () {
   "use strict";
@@ -1733,8 +1741,11 @@ var FIREBASE_CONFIG = null;
         });
       });
   }
-  if (FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey) startCloud().catch(function () { startLocal("No se pudo conectar con la nube."); });
-  else startLocal("");
+  // Dentro de otra página (vista de Claude) no hay conexión a Firebase: se usa el modo local.
+  var enMarco = false;
+  try { enMarco = window.self !== window.top; } catch (e) { enMarco = true; }
+  if (FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey && !enMarco) startCloud().catch(function () { startLocal("No se pudo conectar con la nube."); });
+  else startLocal(enMarco && FIREBASE_CONFIG ? "Para guardar en la nube abra la página yimeroliverosmuneton-wq.github.io/Planteamiento." : "");
 })();
 </script>
 

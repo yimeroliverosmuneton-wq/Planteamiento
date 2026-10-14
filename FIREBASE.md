@@ -34,6 +34,6 @@ La página ya tiene inicio de sesión y creación de cuenta. Sin configuración,
      appId: "1:123...:web:abc..."
    };
    ```
-7. En `index.html`, busque la línea `var FIREBASE_CONFIG = null;` y reemplace `null` por el objeto copiado (desde `{` hasta `}`). Guarde y suba el cambio a GitHub. Estos datos no son secretos: la protección la dan las reglas del paso 5.
+7. En `index.html`, la línea `var FIREBASE_CONFIG = ...` ya tiene la configuración del proyecto `bella-cristal`. Estos datos no son secretos: la protección la dan las reglas del paso 5.
 
 Al abrir la página, debajo del formulario dirá «Sus datos se guardan en la nube». Si alguien ya tenía datos en ese navegador sin cuenta, pasan automáticamente a la primera cuenta que se cree ahí.
